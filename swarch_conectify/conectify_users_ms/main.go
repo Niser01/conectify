@@ -1,9 +1,9 @@
 package main
 
 import (
-	"conectify_users_db/database"
-	"conectify_users_ms/settings"
 	"context"
+	"swarch_conectify/conectify_users_db/DB/database"
+	"swarch_conectify/conectify_users_ms/settings"
 
 	"go.uber.org/fx"
 )

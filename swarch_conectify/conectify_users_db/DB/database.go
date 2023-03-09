@@ -1,9 +1,9 @@
 package conectifyusersdb
 
 import (
-	"conectify_users_ms/settings"
 	"context"
 	"fmt"
+	"swarch_conectify/conectify_users_ms/settings"
 
 	"github.com/jmoiron/sqlx"
 )
