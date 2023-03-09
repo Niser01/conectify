@@ -2,9 +2,10 @@ package main
 
 import (
 	"context"
-	"swarch_conectify/conectify_users_db/DB/database"
-	"swarch_conectify/conectify_users_ms/settings"
+	"swarch_conectify_users/conectify_users_db/DB"
+	"swarch_conectify_users/conectify_users_ms/settings"
 
+	"github.com/jmoiron/sqlx"
 	"go.uber.org/fx"
 )
 
@@ -13,9 +14,16 @@ func main() {
 		fx.Provide(
 			context.Background,
 			settings.New,
-			database.New,
+			DB.New,
 		),
-		fx.Invoke(),
+		fx.Invoke(
+			func(db *sqlx.DB) {
+				_, err := db.Query("SELECT * FROM USERS_PROFILE")
+				if err != nil {
+					panic(err)
+				}
+			},
+		),
 	)
 
 	app.Run()
