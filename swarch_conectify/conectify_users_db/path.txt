@@ -1,0 +1,5 @@
+ path to create the db container
+ 
+ docker run -d --name conectify_users_db -p 3306:3306 --env MYSQL_ROOT_PASSWORD=2023 mysql:latest
+
+
