@@ -1,5 +1,6 @@
 package models
 
+//user db model
 type User struct {
 	ID          int     `db:"id"`
 	Names       string  `db:"names"`
@@ -9,6 +10,7 @@ type User struct {
 	PhoneNumber float32 `db:"phone_number"`
 }
 
+//saved db element model
 type SavedElement struct {
 	IDUser    int `db:"id_user"`
 	IDElement int `db:"id_element"`
