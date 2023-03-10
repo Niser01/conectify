@@ -8,29 +8,29 @@ import (
 )
 
 // views interface has all the crud methods for the user and saved elements
-type view_interface interface {
-	create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error
-	read_userByid(ctx context.Context, id int) (*models.User, error)
-	read_userByemail(ctx context.Context, eMail string) (*models.User, error)
-	read_userByname(ctx context.Context, names string) (*models.User, error)
-	read_userBylastname(ctx context.Context, lastNames string) (*models.User, error)
-	read_userBypnumber(ctx context.Context, phoneNumber float32) (*models.User, error)
-	update_userByid(ctx context.Context, id int, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error
-	delete_userByid(ctx context.Context, id int) error
-	edit_statusByid(ctx context.Context, id int, status int) error
+type View_interface interface {
+	Create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error
+	Read_userByid(ctx context.Context, id int) (*models.User, error)
+	Read_userByemail(ctx context.Context, eMail string) (*models.User, error)
+	Read_userByname(ctx context.Context, names string) (*models.User, error)
+	Read_userBylastname(ctx context.Context, lastNames string) (*models.User, error)
+	Read_userBypnumber(ctx context.Context, phoneNumber float32) (*models.User, error)
+	Update_userByid(ctx context.Context, id int, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error
+	Delete_userByid(ctx context.Context, id int) error
+	Edit_statusByid(ctx context.Context, id int, status int) error
 
-	create_savedElement(ctx context.Context, idUser int, idElement int, idType int) error
-	read_savedElements(ctx context.Context, idUser int) (*models.SavedElement, error)
-	delete_savedElement(ctx context.Context, idElement int) error
-	delete_allsavedElements(ctx context.Context, idUser int) error
+	Create_savedElement(ctx context.Context, idUser int, idElement int, idType int) error
+	Read_savedElements(ctx context.Context, idUser int) (*models.SavedElement, error)
+	Delete_savedElement(ctx context.Context, idElement int) error
+	Delete_allsavedElements(ctx context.Context, idUser int) error
 }
 
 // view is the implementation of the views interface
-type view_struct struct {
+type View_struct struct {
 	db *sqlx.DB
 }
 
 // New returns the implementation of the views interface
-func New(db *sqlx.DB) view_interface {
-	return &view_struct{db: db}
+func New(db *sqlx.DB) View_interface {
+	return &View_struct{db: db}
 }

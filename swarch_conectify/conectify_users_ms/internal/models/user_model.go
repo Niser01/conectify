@@ -4,15 +4,16 @@ package models
 type User struct {
 	ID          int     `db:"id"`
 	Names       string  `db:"names"`
-	LastNames   string  `db:"last_names"`
-	EMail       string  `db:"e_mail"`
+	LastNames   string  `db:"lastNames"`
+	PhotoId     int     `db:"photoId"`
+	EMail       string  `db:"eMail"`
 	Status      int     `db:"status"`
-	PhoneNumber float32 `db:"phone_number"`
+	PhoneNumber float32 `db:"phoneNumber"`
 }
 
 //saved db element model
 type SavedElement struct {
-	IDUser    int `db:"id_user"`
-	IDElement int `db:"id_element"`
-	IDType    int `db:"id_type"`
+	IDUser    int `db:"idUser"`
+	IDElement int `db:"idElement"`
+	IDType    int `db:"idType"`
 }

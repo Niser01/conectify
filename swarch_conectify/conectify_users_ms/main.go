@@ -17,7 +17,15 @@ func main() {
 			DB.New,
 			views.New,
 		),
-		fx.Invoke(),
+		fx.Invoke(
+			func(ctx context.Context, v views.View_interface) {
+				err := v.Create_user(ctx, "Sergio", "Serrano", 1, "a@gmail.com", 1, 1234567890)
+				if err != nil {
+					panic(err)
+				}
+
+			},
+		),
 	)
 
 	app.Run()
