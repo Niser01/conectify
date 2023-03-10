@@ -1,4 +1,4 @@
-package repository
+package views
 
 import (
 	"context"
@@ -58,7 +58,7 @@ const (
 )
 
 // create_user creates a new user in the database
-func (r *view) create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error {
+func (r *view_struct) create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error {
 	_, err := r.db.ExecContext(ctx, queryCreateUser, names, lastNames, photoId, eMail, status, phoneNumber)
 	if err != nil {
 		return err
@@ -66,7 +66,7 @@ func (r *view) create_user(ctx context.Context, names string, lastNames string, 
 	return nil
 }
 
-func (r *view) read_userByid(ctx context.Context, id int) (*models.User, error) {
+func (r *view_struct) read_userByid(ctx context.Context, id int) (*models.User, error) {
 	u := &models.User{}
 	err := r.db.GetContext(ctx, u, queryread_userByid, id)
 	if err != nil {
@@ -75,7 +75,7 @@ func (r *view) read_userByid(ctx context.Context, id int) (*models.User, error) 
 	return u, nil
 }
 
-func (r *view) read_userByemail(ctx context.Context, eMail string) (*models.User, error) {
+func (r *view_struct) read_userByemail(ctx context.Context, eMail string) (*models.User, error) {
 	u := &models.User{}
 	err := r.db.GetContext(ctx, u, queryread_userByemail, eMail)
 	if err != nil {
@@ -84,7 +84,7 @@ func (r *view) read_userByemail(ctx context.Context, eMail string) (*models.User
 	return u, nil
 }
 
-func (r *view) read_userByname(ctx context.Context, names string) (*models.User, error) {
+func (r *view_struct) read_userByname(ctx context.Context, names string) (*models.User, error) {
 	u := &models.User{}
 	err := r.db.GetContext(ctx, u, queryread_userByname, names)
 	if err != nil {
@@ -93,7 +93,7 @@ func (r *view) read_userByname(ctx context.Context, names string) (*models.User,
 	return u, nil
 }
 
-func (r *view) read_userBylastname(ctx context.Context, lastNames string) (*models.User, error) {
+func (r *view_struct) read_userBylastname(ctx context.Context, lastNames string) (*models.User, error) {
 	u := &models.User{}
 	err := r.db.GetContext(ctx, u, queryread_userBylastname, lastNames)
 	if err != nil {
@@ -102,7 +102,7 @@ func (r *view) read_userBylastname(ctx context.Context, lastNames string) (*mode
 	return u, nil
 }
 
-func (r *view) read_userBypnumber(ctx context.Context, phoneNumber float32) (*models.User, error) {
+func (r *view_struct) read_userBypnumber(ctx context.Context, phoneNumber float32) (*models.User, error) {
 	u := &models.User{}
 	err := r.db.GetContext(ctx, u, queryread_userBypnumber, phoneNumber)
 	if err != nil {
@@ -111,7 +111,7 @@ func (r *view) read_userBypnumber(ctx context.Context, phoneNumber float32) (*mo
 	return u, nil
 }
 
-func (r *view) update_userByid(ctx context.Context, id int, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error {
+func (r *view_struct) update_userByid(ctx context.Context, id int, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error {
 	_, err := r.db.ExecContext(ctx, queryupdate_userByid, names, lastNames, photoId, eMail, status, phoneNumber, id)
 	if err != nil {
 		return err
@@ -119,7 +119,7 @@ func (r *view) update_userByid(ctx context.Context, id int, names string, lastNa
 	return nil
 }
 
-func (r *view) delete_userByid(ctx context.Context, id int) error {
+func (r *view_struct) delete_userByid(ctx context.Context, id int) error {
 	_, err := r.db.ExecContext(ctx, querydelete_userByid, id)
 	if err != nil {
 		return err
@@ -127,7 +127,7 @@ func (r *view) delete_userByid(ctx context.Context, id int) error {
 	return nil
 }
 
-func (r *view) edit_statusByid(ctx context.Context, id int, status int) error {
+func (r *view_struct) edit_statusByid(ctx context.Context, id int, status int) error {
 	_, err := r.db.ExecContext(ctx, queryedit_statusByid, status, id)
 	if err != nil {
 		return err
@@ -135,7 +135,7 @@ func (r *view) edit_statusByid(ctx context.Context, id int, status int) error {
 	return nil
 }
 
-func (r *view) create_savedElement(ctx context.Context, idUser int, idElement int, idType int) error {
+func (r *view_struct) create_savedElement(ctx context.Context, idUser int, idElement int, idType int) error {
 	_, err := r.db.ExecContext(ctx, querycreate_savedElement, idUser, idElement, idType)
 	if err != nil {
 		return err
@@ -143,7 +143,7 @@ func (r *view) create_savedElement(ctx context.Context, idUser int, idElement in
 	return nil
 }
 
-func (r *view) read_savedElements(ctx context.Context, idUser int) (*models.SavedElement, error) {
+func (r *view_struct) read_savedElements(ctx context.Context, idUser int) (*models.SavedElement, error) {
 	u := &models.SavedElement{}
 	err := r.db.GetContext(ctx, u, queryread_savedElements, idUser)
 	if err != nil {
@@ -152,7 +152,7 @@ func (r *view) read_savedElements(ctx context.Context, idUser int) (*models.Save
 	return u, nil
 }
 
-func (r *view) delete_savedElement(ctx context.Context, idElement int) error {
+func (r *view_struct) delete_savedElement(ctx context.Context, idElement int) error {
 	_, err := r.db.ExecContext(ctx, querydelete_savedElement, idElement)
 	if err != nil {
 		return err
@@ -160,7 +160,7 @@ func (r *view) delete_savedElement(ctx context.Context, idElement int) error {
 	return nil
 }
 
-func (r *view) delete_allsavedElements(ctx context.Context, idUser int) error {
+func (r *view_struct) delete_allsavedElements(ctx context.Context, idUser int) error {
 	_, err := r.db.ExecContext(ctx, querydelete_allsavedElements, idUser)
 	if err != nil {
 		return err

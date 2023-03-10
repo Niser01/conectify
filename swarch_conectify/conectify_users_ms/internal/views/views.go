@@ -1,4 +1,4 @@
-package repository
+package views
 
 import (
 	"context"
@@ -8,7 +8,7 @@ import (
 )
 
 // views interface has all the crud methods for the user and saved elements
-type views interface {
+type view_interface interface {
 	create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error
 	read_userByid(ctx context.Context, id int) (*models.User, error)
 	read_userByemail(ctx context.Context, eMail string) (*models.User, error)
@@ -26,11 +26,11 @@ type views interface {
 }
 
 // view is the implementation of the views interface
-type view struct {
+type view_struct struct {
 	db *sqlx.DB
 }
 
 // New returns the implementation of the views interface
-func New(db *sqlx.DB) views {
-	return &view{db: db}
+func New(db *sqlx.DB) view_interface {
+	return &view_struct{db: db}
 }
