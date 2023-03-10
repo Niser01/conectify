@@ -5,7 +5,6 @@ import (
 
 	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/DB"
 	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/settings"
-	"github.com/jmoiron/sqlx"
 	"go.uber.org/fx"
 )
 
@@ -16,14 +15,7 @@ func main() {
 			settings.New,
 			DB.New,
 		),
-		fx.Invoke(
-			func(db *sqlx.DB) {
-				_, err := db.Query("SELECT * FROM USERS_PROFILE")
-				if err != nil {
-					panic(err)
-				}
-			},
-		),
+		fx.Invoke(),
 	)
 
 	app.Run()

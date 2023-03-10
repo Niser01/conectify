@@ -8,7 +8,7 @@ create table USERS_PROFILE (
     photoId int not null,
     eMail varchar(100) not null,
     status int not null,
-    phoneNumber double not null,
+    phoneNumber float not null,
     PRIMARY KEY (id),
 );
 
