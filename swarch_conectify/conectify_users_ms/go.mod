@@ -1,10 +1,8 @@
-module swarch_conectify_users
+module github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms
 
 go 1.20
 
 require (
-	github.com/go-sql-driver/mysql v1.7.0 // indirect
-	github.com/jmoiron/sqlx v1.3.5 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
 	go.uber.org/dig v1.16.1 // indirect
 	go.uber.org/fx v1.19.2 // indirect

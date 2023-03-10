@@ -3,8 +3,8 @@ package DB
 import (
 	"context"
 	"fmt"
-	"swarch_conectify_users/conectify_users_ms/settings"
 
+	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/settings"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 )
@@ -20,7 +20,6 @@ func New(ctx context.Context, s *settings.Settings) (*sqlx.DB, error) {
 		s.DB.Port,
 		s.DB.Name,
 	)
-
 
 	return sqlx.ConnectContext(ctx, "mysql", connectionString)
 }
