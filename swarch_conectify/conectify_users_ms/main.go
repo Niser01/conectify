@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 
-	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_db/DB"
+	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/DB"
 	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/settings"
 	"github.com/jmoiron/sqlx"
 	"go.uber.org/fx"
