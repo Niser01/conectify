@@ -20,3 +20,9 @@ create table USERS_SAVED_ELEMENTS (
     PRIMARY KEY (id),
     foreign key (idUser) references USERS_PROFILE(id),
 );
+
+create table USERS_STATUS (
+    id int not null auto_increment,
+    Status varchar(100) not null,
+    PRIMARY KEY (id)
+);
