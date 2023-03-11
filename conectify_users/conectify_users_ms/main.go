@@ -12,6 +12,8 @@ import (
 	"go.uber.org/fx"
 )
 
+// main is the entry point of the application
+
 func main() {
 	app := fx.New(
 		fx.Provide(
