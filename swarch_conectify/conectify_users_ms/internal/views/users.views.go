@@ -92,6 +92,7 @@ func (r *View_struct) Read_userByid(ctx context.Context, id int) (*models.User, 
 	if err != nil {
 		return nil, err
 	}
+
 	return u, nil
 }
 
