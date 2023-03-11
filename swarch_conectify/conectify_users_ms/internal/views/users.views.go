@@ -2,6 +2,7 @@ package views
 
 import (
 	"context"
+	"errors"
 
 	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/internal/models"
 )
@@ -57,8 +58,27 @@ const (
 	WHERE idUser = ?`
 )
 
+var (
+	ErrUserAlreadyExists = errors.New("user already exists")
+)
+
 // create_user creates a new user in the database
+func (r *View_struct) Read_userByemail(ctx context.Context, eMail string) (*models.User, error) {
+	u := &models.User{}
+	err := r.db.GetContext(ctx, u, queryread_userByemail, eMail)
+	if err != nil {
+		return nil, err
+	}
+	return u, nil
+}
+
 func (r *View_struct) Create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber string) error {
+	u, _ := r.Read_userByemail(ctx, eMail)
+
+	if u != nil {
+		return ErrUserAlreadyExists
+	}
+
 	_, err := r.db.ExecContext(ctx, queryCreateUser, names, lastNames, photoId, eMail, status, phoneNumber)
 	if err != nil {
 		return err
@@ -69,15 +89,6 @@ func (r *View_struct) Create_user(ctx context.Context, names string, lastNames s
 func (r *View_struct) Read_userByid(ctx context.Context, id int) (*models.User, error) {
 	u := &models.User{}
 	err := r.db.GetContext(ctx, u, queryread_userByid, id)
-	if err != nil {
-		return nil, err
-	}
-	return u, nil
-}
-
-func (r *View_struct) Read_userByemail(ctx context.Context, eMail string) (*models.User, error) {
-	u := &models.User{}
-	err := r.db.GetContext(ctx, u, queryread_userByemail, eMail)
 	if err != nil {
 		return nil, err
 	}
