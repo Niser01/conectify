@@ -10,7 +10,7 @@ create table USERS_PROFILE (
     status int not null,
     phoneNumber  varchar(100) not null,
     PRIMARY KEY (id),
-    foreign key (status) references USERS_STATUS(id),
+    foreign key (status) references USERS_STATUS(id)
 );
 
 create table USERS_SAVED_ELEMENTS (
@@ -19,7 +19,7 @@ create table USERS_SAVED_ELEMENTS (
     idElement int not null,
     idType int not null,
     PRIMARY KEY (id),
-    foreign key (idUser) references USERS_PROFILE(id),
+    foreign key (idUser) references USERS_PROFILE(id)
 );
 
 create table USERS_STATUS (
