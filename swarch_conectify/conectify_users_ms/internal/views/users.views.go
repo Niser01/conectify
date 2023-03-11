@@ -8,8 +8,8 @@ import (
 
 const (
 	queryCreateUser = `
-	INSERT INTO USERS_PROFILE names, lastNames, photoId, eMail, status, phoneNumber
-	VALUES ?, ?, ?, ?, ?, ?`
+	insert into USERS_PROFILE (names, lastNames, photoId, eMail, status, phoneNumber) 
+	values (?, ?, ?, ?, ?, ?)`
 	queryread_userByid = `
 	SELECT names, lastNames, photoId, eMail, status, phoneNumber
 	FROM USERS_PROFILE 
@@ -43,7 +43,7 @@ const (
 	WHERE id = ?`
 
 	querycreate_savedElement = `
-	INSERT INTO USERS_SAVED_ELEMENTS idUser, idElement, idType
+	INSERT INTO USERS_SAVED_ELEMENTS (idUser, idElement, idType)
 	VALUES ?, ?, ?`
 	queryread_savedElements = `
 	SELECT idUser, idElement, idType

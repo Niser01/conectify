@@ -19,7 +19,7 @@ func main() {
 		),
 		fx.Invoke(
 			func(ctx context.Context, v views.View_interface) {
-				err := v.Create_user(ctx, "Sergio", "Serrano", 1, "a@gmail.com", 1, 1234567890)
+				err := v.Create_user(ctx, "Nicolás", "Serrano", 1, "a@gmail.com", 1, 123456789)
 				if err != nil {
 					panic(err)
 				}
