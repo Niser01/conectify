@@ -17,15 +17,7 @@ func main() {
 			DB.New,
 			views.New,
 		),
-		fx.Invoke(
-			func(ctx context.Context, v views.View_interface) {
-				err := v.Create_savedElement(ctx, 1, 1, 1)
-				if err != nil {
-					panic(err)
-				}
-
-			},
-		),
+		fx.Invoke(),
 	)
 
 	app.Run()
