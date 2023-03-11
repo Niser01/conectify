@@ -8,6 +8,8 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
+//handlers for the API
+
 func (a *API) Create_User(c echo.Context) error {
 	ctx := c.Request().Context()
 	params := dtos.Create_User{}

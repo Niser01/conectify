@@ -30,6 +30,8 @@ func main() {
 	app.Run()
 }
 
+// setLifeCycle is used to set the lifecycle of the application and start the server on a goroutine so that it doesn't block the main thread of execution
+
 func setLifeCycle(lc fx.Lifecycle, a *api.API, s *settings.Settings, e *echo.Echo) {
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {

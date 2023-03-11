@@ -7,6 +7,7 @@ import (
 	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/internal/models"
 )
 
+// querys for the database
 const (
 	queryCreateUser = `
 	insert into USERS_PROFILE (names, lastNames, photoId, eMail, status, phoneNumber) 

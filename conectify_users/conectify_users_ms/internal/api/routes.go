@@ -2,6 +2,8 @@ package api
 
 import "github.com/labstack/echo/v4"
 
+//routes for users
+
 func (a *API) RegisterRoutes(e *echo.Echo) {
 	users := e.Group("/users")
 	users.POST("/create", a.Create_User)

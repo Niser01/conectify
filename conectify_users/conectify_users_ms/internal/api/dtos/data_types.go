@@ -1,5 +1,7 @@
 package dtos
 
+//dtos stands for data transfer objects and are used to transfer data between the client and the server
+
 type Create_User struct {
 	Names       string `json:"names" ` // validate:"required" is a tag that validates that the field is not empty
 	LastNames   string `json:"lastNames" validate:"required"`
