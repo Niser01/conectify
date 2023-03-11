@@ -39,12 +39,12 @@ const (
 	WHERE id = ?`
 	queryedit_statusByid = `
 	UPDATE USERS_PROFILE 
-	SET status = (SELECT Status from USERS_STATUS WHERE id = ?) 
+	SET status =  ?
 	WHERE id = ?`
 
 	querycreate_savedElement = `
 	INSERT INTO USERS_SAVED_ELEMENTS (idUser, idElement, idType)
-	VALUES ?, ?, ?`
+	VALUES (?, ?, ?)`
 	queryread_savedElements = `
 	SELECT idUser, idElement, idType
 	FROM USERS_SAVED_ELEMENTS 
@@ -58,7 +58,7 @@ const (
 )
 
 // create_user creates a new user in the database
-func (r *View_struct) Create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error {
+func (r *View_struct) Create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber string) error {
 	_, err := r.db.ExecContext(ctx, queryCreateUser, names, lastNames, photoId, eMail, status, phoneNumber)
 	if err != nil {
 		return err
@@ -102,7 +102,7 @@ func (r *View_struct) Read_userBylastname(ctx context.Context, lastNames string)
 	return u, nil
 }
 
-func (r *View_struct) Read_userBypnumber(ctx context.Context, phoneNumber float32) (*models.User, error) {
+func (r *View_struct) Read_userBypnumber(ctx context.Context, phoneNumber string) (*models.User, error) {
 	u := &models.User{}
 	err := r.db.GetContext(ctx, u, queryread_userBypnumber, phoneNumber)
 	if err != nil {
@@ -111,7 +111,7 @@ func (r *View_struct) Read_userBypnumber(ctx context.Context, phoneNumber float3
 	return u, nil
 }
 
-func (r *View_struct) Update_userByid(ctx context.Context, id int, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error {
+func (r *View_struct) Update_userByid(ctx context.Context, id int, names string, lastNames string, photoId int, eMail string, status int, phoneNumber string) error {
 	_, err := r.db.ExecContext(ctx, queryupdate_userByid, names, lastNames, photoId, eMail, status, phoneNumber, id)
 	if err != nil {
 		return err
@@ -128,7 +128,7 @@ func (r *View_struct) Delete_userByid(ctx context.Context, id int) error {
 }
 
 func (r *View_struct) Edit_statusByid(ctx context.Context, id int, status int) error {
-	_, err := r.db.ExecContext(ctx, queryedit_statusByid, status, id)
+	_, err := r.db.ExecContext(ctx, queryedit_statusByid, id, status)
 	if err != nil {
 		return err
 	}

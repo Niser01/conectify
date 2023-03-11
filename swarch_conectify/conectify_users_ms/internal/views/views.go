@@ -9,13 +9,13 @@ import (
 
 // views interface has all the crud methods for the user and saved elements
 type View_interface interface {
-	Create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error
+	Create_user(ctx context.Context, names string, lastNames string, photoId int, eMail string, status int, phoneNumber string) error
 	Read_userByid(ctx context.Context, id int) (*models.User, error)
 	Read_userByemail(ctx context.Context, eMail string) (*models.User, error)
 	Read_userByname(ctx context.Context, names string) (*models.User, error)
 	Read_userBylastname(ctx context.Context, lastNames string) (*models.User, error)
-	Read_userBypnumber(ctx context.Context, phoneNumber float32) (*models.User, error)
-	Update_userByid(ctx context.Context, id int, names string, lastNames string, photoId int, eMail string, status int, phoneNumber float32) error
+	Read_userBypnumber(ctx context.Context, phoneNumber string) (*models.User, error)
+	Update_userByid(ctx context.Context, id int, names string, lastNames string, photoId int, eMail string, status int, phoneNumber string) error
 	Delete_userByid(ctx context.Context, id int) error
 	Edit_statusByid(ctx context.Context, id int, status int) error
 

@@ -8,8 +8,9 @@ create table USERS_PROFILE (
     photoId int not null,
     eMail varchar(100) not null,
     status int not null,
-    phoneNumber float not null,
+    phoneNumber  varchar(100) not null,
     PRIMARY KEY (id),
+    foreign key (status) references USERS_STATUS(id),
 );
 
 create table USERS_SAVED_ELEMENTS (

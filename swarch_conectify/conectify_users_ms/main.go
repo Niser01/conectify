@@ -19,7 +19,7 @@ func main() {
 		),
 		fx.Invoke(
 			func(ctx context.Context, v views.View_interface) {
-				err := v.Create_user(ctx, "Nicolás", "Serrano", 1, "a@gmail.com", 1, 123456789)
+				err := v.Create_savedElement(ctx, 1, 1, 1)
 				if err != nil {
 					panic(err)
 				}
