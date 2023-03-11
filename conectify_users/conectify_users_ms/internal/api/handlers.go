@@ -3,8 +3,8 @@ package api
 import (
 	"net/http"
 
-	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/internal/api/dtos"
-	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/internal/views"
+	"github.com/Niser01/conectify/tree/main/conectify_users/conectify_users_ms/internal/api/dtos"
+	"github.com/Niser01/conectify/tree/main/conectify_users/conectify_users_ms/internal/views"
 	"github.com/labstack/echo/v4"
 )
 

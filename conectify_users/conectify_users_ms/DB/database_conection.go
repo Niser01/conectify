@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/settings"
+	"github.com/Niser01/conectify/tree/main/conectify_users/conectify_users_ms/settings"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
 )

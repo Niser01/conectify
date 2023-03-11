@@ -4,10 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/DB"
-	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/internal/api"
-	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/internal/views"
-	"github.com/Niser01/Arq_soft/tree/main/swarch_conectify/conectify_users_ms/settings"
+	"github.com/Niser01/conectify/tree/main/conectify_users/conectify_users_ms/DB"
+	"github.com/Niser01/conectify/tree/main/conectify_users/conectify_users_ms/internal/api"
+	"github.com/Niser01/conectify/tree/main/conectify_users/conectify_users_ms/internal/views"
+	"github.com/Niser01/conectify/tree/main/conectify_users/conectify_users_ms/settings"
 	"github.com/labstack/echo/v4"
 	"go.uber.org/fx"
 )
