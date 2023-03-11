@@ -1,8 +1,10 @@
-FROM mysql:latest
+FROM golang:latest
 
-ENV MYSQL_ROOT_PASSWORD=2023
-ENV MYSQL_DATABASE=conectify_users_db
-ENV MYSQL_USER=conectify
-ENV MYSQL_PASSWORD=2023
+WORKDIR /usr/src/app
 
-EXPOSE 3306
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
+
+COPY . .
+RUN go build -v -o /usr/local/bin/app/conectify_users/conectify_users_ms/main.go
+
