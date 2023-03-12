@@ -125,7 +125,7 @@ func (r *View_struct) Read_userBypnumber(ctx context.Context, phoneNumber string
 }
 
 func (r *View_struct) Update_userByid(ctx context.Context, id int, names string, lastNames string, photoId int, eMail string, status int, phoneNumber string) error {
-	_, err := r.db.ExecContext(ctx, queryupdate_userByid, names, lastNames, photoId, eMail, status, phoneNumber, id)
+	_, err := r.db.ExecContext(ctx, queryupdate_userByid, id, names, lastNames, photoId, eMail, status, phoneNumber)
 	if err != nil {
 		return err
 	}
@@ -141,7 +141,7 @@ func (r *View_struct) Delete_userByid(ctx context.Context, id int) error {
 }
 
 func (r *View_struct) Edit_statusByid(ctx context.Context, id int, status int) error {
-	_, err := r.db.ExecContext(ctx, queryedit_statusByid, id, status)
+	_, err := r.db.ExecContext(ctx, queryedit_statusByid, status, id)
 	if err != nil {
 		return err
 	}
