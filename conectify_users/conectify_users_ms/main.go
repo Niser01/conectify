@@ -24,9 +24,7 @@ func main() {
 			api.New,
 			echo.New,
 		),
-		fx.Invoke(
-			setLifeCycle,
-		),
+		fx.Invoke(setLifeCycle),
 	)
 
 	app.Run()

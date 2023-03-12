@@ -13,4 +13,5 @@ RUN go build -o ./conectify_users_ms .
 COPY . .
 ARG URL=0.0.0.0:8080
 
+
 CMD ["./conectify_users_ms"]

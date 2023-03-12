@@ -1,6 +1,0 @@
-
-Build ms image
-docker build -t conectify_users_ms .
-
-Create container of ms:
-docker run --name conectify_users_ms --network="host" -p 8080:8080 -e DB_HOST=host.docker.internal  -e DB_PORT=3306 -e DB_USER=root -e DB_PASSWORD=2023 -e DB_NAME=conectify_users_db -e URL=0.0.0.0:8080 conectify_users_ms

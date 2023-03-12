@@ -1,7 +1,7 @@
 port: 8080
 database:
-  host: localhost
+  host: host.docker.internal
   port: 3306
-  user: root
+  user: conectify
   pasword: 2023
   name: conectify_users_db

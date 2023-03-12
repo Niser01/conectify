@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+
+  conectify_u_db:
+    image: mysql
+    restart: always
+    container_name: conectify_users_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=2023
+      - MYSQL_DATABASE=conectify_users_db
+      - MYSQL_USER=conectify
+      - MYSQL_PASSWORD=2023
+      - EXPOSE 3306 
+    ports: 
+      - 3306:3306 
+
+
+  conectify_users_ms:
+    build: 
+      context: ./conectify_users_ms
+      dockerfile: Dockerfile
+    image: conectify_users_ms
+    ports:
+      - 8080:8080
+    depends_on:
+      - conectify_u_db
+    container_name: conectify_users_ms
+    environment:
+      - DB_PASSWORD=2023
+      - DB_USER=conectify
+      - DB_NAME=conectify_users_db
+      - DB_HOST=conectify_u_db
+      - DB_PORT=33060
+      - EXPOSE 8080
+
+networks:
+  default:
+      name: conectify_users
+
+
+
+
+
+
+
