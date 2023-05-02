@@ -61,7 +61,6 @@ type Query {
   messageAsThread(id: String!): MessageAsThread!
   messages: [Message!]!
   searchMessages(search: String!): [Message!]!
-  userByEmail(email: String!): User!
   userById(id: Float!): User!
 }
 

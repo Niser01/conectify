@@ -17,14 +17,19 @@ import { url, port, entryPoint } from './user_server.js';
 const URL = `http://${url}:${port}/${entryPoint}`;
 let UserResolver = class UserResolver {
     async userById(id) {
-        return await axios.get(`${URL}/users/id_read/${id}`)
-            .then(res => res.data)
-            .catch(err => console.log(err));
+        let message = await axios.get(URL + "/id_read/" + id);
+        this.transformToGraphql(message);
+        return message;
     }
-    async userByEmail(email) {
-        return await axios.get(`${URL}/users/email_read/${email}`)
-            .then(res => res.data)
-            .catch(err => console.log(err));
+    transformToGraphql(message) {
+        if (Array.isArray(message.reactions)) {
+            message.reactions = '{' + message.reactions.toString() + '}';
+        }
+        else {
+            message.reactions = JSON.stringify(message.reactions);
+        }
+        message.created_at = new Date(message.created_at);
+        message.updated_at = new Date(message.updated_at);
     }
 };
 __decorate([
@@ -34,13 +39,6 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "userById", null);
-__decorate([
-    Query(returns => User),
-    __param(0, Arg("email")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userByEmail", null);
 UserResolver = __decorate([
     Resolver(User)
 ], UserResolver);

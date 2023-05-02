@@ -9,24 +9,27 @@ const URL = `http://${url}:${port}/${entryPoint}`;
 export default class UserResolver {
     @Query(returns => User)
     async userById(@Arg("id") id: number) {
-        return await axios.get(`${URL}/users/id_read/${id}`)
-            .then(res => res.data)
-            .catch(err => console.log(err))
+        let message = await axios.get(URL + "/id_read/" + id)
+        this.transformToGraphql(message);
+        return message;
     }
-    @Query(returns => User)
-    async userByEmail(@Arg("email") email: string) {
-        return await axios.get(`${URL}/users/email_read/${email}`)
-            .then(res => res.data)
-            .catch(err => console.log(err))
+
+
+
+
+
+
+    transformToGraphql(message) {
+        if (Array.isArray(message.reactions)) {
+        message.reactions = '{'+message.reactions.toString()+'}';
+        } else {
+        message.reactions = JSON.stringify(message.reactions);
+        }
+        message.created_at = new Date(message.created_at);
+        message.updated_at = new Date(message.updated_at);
     }
+
 }
-
-
-
-
-
-
-
 
 /*
 

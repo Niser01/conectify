@@ -1,3 +1,3 @@
 export const url = 'host.docker.internal'
 export const port = '8080'
-export const entryPoint = 'conectify_user_ms'
+export const entryPoint = 'users'
