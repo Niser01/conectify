@@ -12,7 +12,7 @@ import { Field, ObjectType, ID, } from "type-graphql";
 let User = class User {
 };
 __decorate([
-    Field(() => ID),
+    Field(type => ID),
     __metadata("design:type", Number)
 ], User.prototype, "id", void 0);
 __decorate([
@@ -46,9 +46,9 @@ export { User };
 let SavedElement = class SavedElement {
 };
 __decorate([
-    Field(() => ID),
+    Field(type => ID),
     __metadata("design:type", Number)
-], SavedElement.prototype, "id", void 0);
+], SavedElement.prototype, "_id", void 0);
 __decorate([
     Field(),
     __metadata("design:type", Number)

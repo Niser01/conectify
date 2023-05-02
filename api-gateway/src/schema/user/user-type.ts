@@ -3,7 +3,7 @@ import { Field, ObjectType, ID, } from "type-graphql";
 
 @ObjectType()
 export class User {
-    @Field(() => ID)
+    @Field(type => ID)
     id: number;
 
     @Field()
@@ -28,8 +28,8 @@ export class User {
 
 @ObjectType()
 export class SavedElement{
-    @Field(() => ID)
-    id: number;
+    @Field(type => ID)
+    _id: number;
 
     @Field()
     IDUser: number;

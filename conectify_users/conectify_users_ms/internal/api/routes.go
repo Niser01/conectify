@@ -7,7 +7,7 @@ import "github.com/labstack/echo/v4"
 func (a *API) RegisterRoutes(e *echo.Echo) {
 	users := e.Group("/users")
 	users.POST("/create", a.Create_User)
-	users.GET("/id_read", a.Read_userByid)
+	users.GET("/id_read/{id}", a.Read_userByid)
 	users.GET("/email_read", a.Read_userByemail)
 	users.GET("/name_read", a.Read_userByname)
 	users.GET("lastname_read", a.Read_userBylastname)
