@@ -1,11 +1,34 @@
 import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
-import { User, SavedElement } from "./user-type";
+import { User, SavedElement } from "./user-type.js";
 import { url, port, entryPoint } from './user_server.js';
 
 const URL = `http://${url}:${port}/${entryPoint}`;
 
+@Resolver(User)
+export default class UserResolver {
+    @Query(returns => User)
+    async userById(@Arg("id") id: number) {
+        return await axios.get(`${URL}/users/id_read/${id}`)
+            .then(res => res.data)
+            .catch(err => console.log(err))
+    }
+    @Query(returns => User)
+    async userByEmail(@Arg("email") email: string) {
+        return await axios.get(`${URL}/users/email_read/${email}`)
+            .then(res => res.data)
+            .catch(err => console.log(err))
+    }
+}
 
+
+
+
+
+
+
+
+/*
 
 const resolvers = {
     Query: {
@@ -80,3 +103,5 @@ const resolvers = {
 };
 
 export default resolvers;
+
+*/

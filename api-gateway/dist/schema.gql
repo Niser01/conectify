@@ -61,4 +61,16 @@ type Query {
   messageAsThread(id: String!): MessageAsThread!
   messages: [Message!]!
   searchMessages(search: String!): [Message!]!
+  userByEmail(email: String!): User!
+  userById(id: Float!): User!
+}
+
+type User {
+  EMail: String!
+  LastNames: String!
+  Names: String!
+  PhoneNumber: String!
+  PhotoId: Float!
+  Status: Float!
+  id: ID!
 }
