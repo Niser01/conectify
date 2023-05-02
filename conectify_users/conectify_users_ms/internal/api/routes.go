@@ -12,9 +12,9 @@ func (a *API) RegisterRoutes(e *echo.Echo) {
 	users.GET("/name_read", a.Read_userByname)
 	users.GET("lastname_read", a.Read_userBylastname)
 	users.GET("/phone_read", a.Read_userBypnumber)
-	users.POST("/update", a.Update_userByid)
+	users.PUT("/update", a.Update_userByid)
 	users.DELETE("/delete", a.Delete_userByid)
-	users.POST("/edit_status", a.Edit_statusByid)
+	users.PUT("/edit_status", a.Edit_statusByid)
 
 	savedElement := e.Group("/savedElement")
 	savedElement.POST("/create", a.Create_savedElement)
