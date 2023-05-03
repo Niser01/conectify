@@ -13,13 +13,13 @@ func (a *API) RegisterRoutes(e *echo.Echo) {
 	users.GET("lastname_read/:lastNames", a.Read_userBylastname)
 	users.GET("/phone_read/:phoneNumber", a.Read_userBypnumber)
 	users.PUT("/update", a.Update_userByid)
-	users.DELETE("/delete", a.Delete_userByid)
+	users.DELETE("/delete/:id", a.Delete_userByid)
 	users.PUT("/edit_status", a.Edit_statusByid)
 
 	savedElement := e.Group("/savedElement")
 	savedElement.POST("/create", a.Create_savedElement)
-	savedElement.GET("/id_read/:idUser", a.Read_savedElements)
-	savedElement.DELETE("/delete", a.Delete_savedElement)
-	savedElement.DELETE("/delete_all", a.Delete_allsavedElements)
+	savedElement.GET("/id_read/:idElement", a.Read_savedElements)
+	savedElement.DELETE("/delete/:idElement	", a.Delete_savedElement)
+	savedElement.DELETE("/delete_all/:idUser", a.Delete_allsavedElements)
 
 }

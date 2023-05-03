@@ -40,11 +40,17 @@ type MessageAsThread {
 
 type Mutation {
   createMessage(newMessageData: NewMessageInput!): String
+  createSavedElement(IdElement: Float!, IdType: String!, IdUser: Float!): String
   deleteFileFromMessage(fileId: String!, id: String!, userId: String!): String
   deleteMessage(id: String!, userId: String!): String
+  deleteSavedElement(idElement: Float!): String
   editMessage(content: String!, id: String!, userId: String!): String
   reactToMessage(id: String!, reaction: String!, userId: String!): String
   toggleMessageVisibility(id: String!, userId: String!): String
+  userCreate(EMail: String!, LastNames: String!, Names: String!, PhoneNumber: String!, PhotoId: Float!, Status: Float!): String
+  userDelete(id: String!): String
+  userEditStatus(Id: Float!, Status: Float!): String
+  userUpdate(EMail: String!, Id: String!, LastNames: String!, Names: String!, PhoneNumber: String!, PhotoId: Float!, Status: Float!): String
 }
 
 input NewMessageInput {
@@ -57,15 +63,23 @@ input NewMessageInput {
 }
 
 type Query {
+  getSavedElementById(idElement: Float!): SavedElement!
   message(id: String!): Message!
   messageAsThread(id: String!): MessageAsThread!
   messages: [Message!]!
   searchMessages(search: String!): [Message!]!
-  userByEmail(email: String!): User!
+  userByEmail(eMail: String!): User!
   userById(id: String!): User!
   userByLastName(lastNames: String!): User!
   userByNames(names: String!): User!
-  userByPhone(phone: String!): User!
+  userByPhone(phoneNumber: String!): User!
+}
+
+type SavedElement {
+  IDElement: Float!
+  IDType: Float!
+  IDUser: Float!
+  id: String!
 }
 
 type User {
