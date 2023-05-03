@@ -187,6 +187,18 @@ let UserResolver = class UserResolver {
             console.log(error);
         });
     }
+    async deleteAllSavedElement(idUser) {
+        let message = await axios.delete(URL + "/savedElement/deleteAll/" + idUser)
+            .then(function (response) {
+            if (response.status === 404) {
+                throw new Error("SavedElement not deleted");
+            }
+            return response.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+    }
 };
 __decorate([
     Mutation(returns => String, { nullable: true }),
@@ -286,6 +298,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "deleteSavedElement", null);
+__decorate([
+    Mutation(returns => String, { nullable: true }),
+    __param(0, Arg("idUser")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "deleteAllSavedElement", null);
 UserResolver = __decorate([
     Resolver(User)
 ], UserResolver);

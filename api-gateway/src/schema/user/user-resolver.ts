@@ -240,6 +240,20 @@ export default class UserResolver {
       });
     }
 
+    @Mutation(returns => String, { nullable: true })
+    async deleteAllSavedElement(@Arg("idUser") idUser: number){
+      let message = await axios.delete(URL + "/savedElement/deleteAll/"+idUser)
+      .then(function (response) {
+        if (response.status === 404) {
+          throw new Error("SavedElement not deleted" );
+        }
+        return response.data;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+
 
 }
 

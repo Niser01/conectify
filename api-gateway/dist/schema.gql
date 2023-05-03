@@ -41,6 +41,7 @@ type MessageAsThread {
 type Mutation {
   createMessage(newMessageData: NewMessageInput!): String
   createSavedElement(IdElement: Float!, IdType: String!, IdUser: Float!): String
+  deleteAllSavedElement(idUser: Float!): String
   deleteFileFromMessage(fileId: String!, id: String!, userId: String!): String
   deleteMessage(id: String!, userId: String!): String
   deleteSavedElement(idElement: Float!): String
