@@ -29,6 +29,55 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
+    async userByEmail(email) {
+        let message = await axios.get(URL + "/email_read/" + email)
+            .then(function (response) {
+            if (response.status === 404) {
+                throw new Error("Message not found");
+            }
+            return response.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+        return message;
+    }
+    async userByNames(names) {
+        let message = await axios.get(URL + "/names_read/" + names)
+            .then(function (response) {
+            if (response.status === 404) {
+                throw new Error("Message not found");
+            }
+            return response.data;
+        });
+        return message;
+    }
+    async userByLastName(names) {
+        let message = await axios.get(URL + "/lastNames_read/" + names)
+            .then(function (response) {
+            if (response.status === 404) {
+                throw new Error("Message not found");
+            }
+            return response.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+        return message;
+    }
+    async userByPhone(phone) {
+        let message = await axios.get(URL + "/phone_read/" + phone)
+            .then(function (response) {
+            if (response.status === 404) {
+                throw new Error("Message not found");
+            }
+            return response.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+        return message;
+    }
 };
 __decorate([
     Query(returns => User),
@@ -37,6 +86,34 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "userById", null);
+__decorate([
+    Query(returns => User),
+    __param(0, Arg("email")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "userByEmail", null);
+__decorate([
+    Query(returns => User),
+    __param(0, Arg("names")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "userByNames", null);
+__decorate([
+    Query(returns => User),
+    __param(0, Arg("lastNames")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "userByLastName", null);
+__decorate([
+    Query(returns => User),
+    __param(0, Arg("phone")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "userByPhone", null);
 UserResolver = __decorate([
     Resolver(User)
 ], UserResolver);

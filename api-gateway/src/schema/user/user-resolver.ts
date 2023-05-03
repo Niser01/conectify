@@ -23,6 +23,68 @@ export default class UserResolver {
         return message;
     }
 
+    @Query(returns => User)
+    async userByEmail(@Arg("email") email: string ) {
+        let message = await axios.get(URL + "/email_read/"+email)
+        .then(function (response) {
+            if (response.status === 404) {
+              throw new Error("Message not found" );
+            }
+            return response.data;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        return message;
+    }
+
+    @Query(returns => User)
+    async userByNames(@Arg("names") names: string ) {
+        let message = await axios.get(URL + "/names_read/"+names)
+        .then(function (response) {
+            if (response.status === 404) {
+              throw new Error("Message not found" );
+            }
+            return response.data;
+          });
+
+          return message;
+    }
+
+
+    @Query(returns => User)
+    async userByLastName(@Arg("lastNames") names: string ) {
+        let message = await axios.get(URL + "/lastNames_read/"+names)
+        .then(function (response) {
+            if (response.status === 404) {  
+              throw new Error("Message not found" );
+            }
+            return response.data;
+          })  
+          .catch(function (error) {
+            console.log(error);
+          });
+          return message;
+    }
+
+
+    @Query(returns => User)
+    async userByPhone(@Arg("phone") phone: string ) {
+        let message = await axios.get(URL + "/phone_read/"+phone)
+        .then(function (response) {
+            if (response.status === 404) {
+              throw new Error("Message not found" );
+            }
+            return response.data;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        return message;
+    }
+
 
 
 

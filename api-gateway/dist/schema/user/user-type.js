@@ -8,13 +8,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import "reflect-metadata";
-import { Field, ObjectType, ID, } from "type-graphql";
+import { Field, ObjectType, } from "type-graphql";
 let User = class User {
 };
 __decorate([
-    Field(type => ID),
+    Field(),
     __metadata("design:type", String)
-], User.prototype, "id", void 0);
+], User.prototype, "ID", void 0);
 __decorate([
     Field(),
     __metadata("design:type", String)
@@ -46,7 +46,7 @@ export { User };
 let SavedElement = class SavedElement {
 };
 __decorate([
-    Field(type => ID),
+    Field(),
     __metadata("design:type", String)
 ], SavedElement.prototype, "id", void 0);
 __decorate([
