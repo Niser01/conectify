@@ -8,8 +8,8 @@ const URL = `http://localhost:${port}/${entryPoint}`;
 @Resolver(User)
 export default class UserResolver {
     @Query(returns => User)
-    async userById(@Arg("id") id: number ) {
-        let message = axios.get(URL + "/id_read/",{data:{id:id}})
+    async userById(@Arg("id") id: string ) {
+        let message = await axios.get(URL + "/id_read/"+id)
         .then(function (response) {
             if (response.status === 404) {
               throw new Error("Message not found" );

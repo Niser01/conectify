@@ -13,23 +13,23 @@ const (
 	insert into USERS_PROFILE (names, lastNames, photoId, eMail, status, phoneNumber) 
 	values (?, ?, ?, ?, ?, ?)`
 	queryread_userByid = `
-	SELECT names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
 	FROM USERS_PROFILE 
 	WHERE id = ?`
 	queryread_userByemail = `
-	SELECT names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
 	FROM USERS_PROFILE 
 	WHERE eMail = ?`
 	queryread_userByname = `
-	SELECT names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
 	FROM USERS_PROFILE 
 	WHERE names = ?`
 	queryread_userBylastname = `
-	SELECT names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
 	FROM USERS_PROFILE 
 	WHERE lastNames = ?`
 	queryread_userBypnumber = `
-	SELECT names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
 	FROM USERS_PROFILE 
 	WHERE phoneNumber = ?`
 	queryupdate_userByid = `

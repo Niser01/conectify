@@ -17,7 +17,7 @@ import { port, entryPoint } from './user_server.js';
 const URL = `http://localhost:${port}/${entryPoint}`;
 let UserResolver = class UserResolver {
     async userById(id) {
-        let message = axios.get(URL + "/id_read/", { data: { id: id } })
+        let message = await axios.get(URL + "/id_read/" + id)
             .then(function (response) {
             if (response.status === 404) {
                 throw new Error("Message not found");
@@ -34,7 +34,7 @@ __decorate([
     Query(returns => User),
     __param(0, Arg("id")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "userById", null);
 UserResolver = __decorate([

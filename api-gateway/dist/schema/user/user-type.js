@@ -13,7 +13,7 @@ let User = class User {
 };
 __decorate([
     Field(type => ID),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], User.prototype, "id", void 0);
 __decorate([
     Field(),
@@ -47,8 +47,8 @@ let SavedElement = class SavedElement {
 };
 __decorate([
     Field(type => ID),
-    __metadata("design:type", Number)
-], SavedElement.prototype, "_id", void 0);
+    __metadata("design:type", String)
+], SavedElement.prototype, "id", void 0);
 __decorate([
     Field(),
     __metadata("design:type", Number)
