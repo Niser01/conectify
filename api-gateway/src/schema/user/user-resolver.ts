@@ -1,7 +1,7 @@
 import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
 import { User, SavedElement } from "./user-type.js";
-import { url, port, entryPoint } from './user_server.js';
+import { url, port } from './user_server.js';
 
 const URL = `http://localhost:${port}/`;
 
@@ -194,12 +194,10 @@ export default class UserResolver {
     async createSavedElement(
       @Arg("IdUser") IdUser: number,
       @Arg("IdElement") IdElement: number,
-      @Arg("IdType") IdType: string,
     ){
       let message = await axios.post(URL + "/savedElement", {
         IdUser: IdUser,
         IdElement: IdElement,
-        IdType: IdType,
       })
       .then(function (response) {
         if (response.status === 404) {

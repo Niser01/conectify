@@ -37,8 +37,6 @@ export class SavedElement{
     @Field()
     IDElement: number;
 
-    @Field()
-    IDType: number;
 }
 
 
