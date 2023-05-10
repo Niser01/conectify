@@ -57,10 +57,6 @@ __decorate([
     Field(),
     __metadata("design:type", Number)
 ], SavedElement.prototype, "IDElement", void 0);
-__decorate([
-    Field(),
-    __metadata("design:type", Number)
-], SavedElement.prototype, "IDType", void 0);
 SavedElement = __decorate([
     ObjectType()
 ], SavedElement);

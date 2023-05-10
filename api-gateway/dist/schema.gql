@@ -50,7 +50,7 @@ type MessageAsThread {
 
 type Mutation {
   createMessage(newMessageData: NewMessageInput!): String
-  createSavedElement(IdElement: Float!, IdType: String!, IdUser: Float!): String
+  createSavedElement(IdElement: Float!, IdUser: Float!): String
   deleteAllSavedElement(idUser: Float!): String
   deleteFile(fileId: String!, userId: String!): String
   deleteFileFromMessage(fileId: String!, id: String!, userId: String!): String
@@ -102,7 +102,6 @@ type Query {
 
 type SavedElement {
   IDElement: Float!
-  IDType: Float!
   IDUser: Float!
   id: String!
 }

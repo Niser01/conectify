@@ -147,11 +147,10 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async createSavedElement(IdUser, IdElement, IdType) {
+    async createSavedElement(IdUser, IdElement) {
         let message = await axios.post(URL + "/savedElement", {
             IdUser: IdUser,
             IdElement: IdElement,
-            IdType: IdType,
         })
             .then(function (response) {
             if (response.status === 404) {
@@ -279,9 +278,8 @@ __decorate([
     Mutation(returns => String, { nullable: true }),
     __param(0, Arg("IdUser")),
     __param(1, Arg("IdElement")),
-    __param(2, Arg("IdType")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Number, String]),
+    __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "createSavedElement", null);
 __decorate([
