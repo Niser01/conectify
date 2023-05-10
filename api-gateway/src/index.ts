@@ -15,7 +15,6 @@ import MessageResolver from "./schema/message/message-resolver.js";
 import UserResolver from "./schema/user/user-resolver.js";
 import ChannelResolver from "./schema/channel/channel-resolver.js";
 import FileResolver from "./schema/file/file-resolver.js";
-import {SSOResolver} from "./schema/sso/sso-resolver.js";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 import CompositeResolver from "./schema/composite/composite-resolver.js";
 
@@ -25,7 +24,7 @@ interface MyContext {
 
 // ... Building schema here
 const schema = await buildSchema({
-  resolvers: [MessageResolver, UserResolver, SSOResolver, ChannelResolver, FileResolver, CompositeResolver],
+  resolvers: [MessageResolver, UserResolver, ChannelResolver, FileResolver, CompositeResolver],
   validate: { forbidUnknownValues: false },
   // automatically create `schema.gql` file with schema definition in current folder
   emitSchemaFile: path.resolve(__dirname, "schema.gql"),
