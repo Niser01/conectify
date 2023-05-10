@@ -45,10 +45,10 @@ const (
 	WHERE id = ?`
 
 	querycreate_savedElement = `
-	INSERT INTO USERS_SAVED_ELEMENTS (idUser, idElement, idType)
-	VALUES (?, ?, ?)`
+	INSERT INTO USERS_SAVED_ELEMENTS (idUser, idElement)
+	VALUES (?, ?)`
 	queryread_savedElements = `
-	SELECT idUser, idElement, idType
+	SELECT idUser, idElement
 	FROM USERS_SAVED_ELEMENTS 
 	WHERE idUser = ?`
 	querydelete_savedElement = `
@@ -148,8 +148,8 @@ func (r *View_struct) Edit_statusByid(ctx context.Context, id int, status int) e
 	return nil
 }
 
-func (r *View_struct) Create_savedElement(ctx context.Context, idUser int, idElement int, idType int) error {
-	_, err := r.db.ExecContext(ctx, querycreate_savedElement, idUser, idElement, idType)
+func (r *View_struct) Create_savedElement(ctx context.Context, idUser int, idElement int) error {
+	_, err := r.db.ExecContext(ctx, querycreate_savedElement, idUser, idElement)
 	if err != nil {
 		return err
 	}

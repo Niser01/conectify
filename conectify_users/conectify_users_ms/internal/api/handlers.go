@@ -166,7 +166,7 @@ func (a *API) Create_savedElement(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	err = a.view.Create_savedElement(ctx, params.IdUser, params.IdElement, params.IdType)
+	err = a.view.Create_savedElement(ctx, params.IdUser, params.IdElement)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}

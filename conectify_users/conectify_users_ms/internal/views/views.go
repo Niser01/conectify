@@ -19,7 +19,7 @@ type View_interface interface {
 	Delete_userByid(ctx context.Context, id int) error
 	Edit_statusByid(ctx context.Context, id int, status int) error
 
-	Create_savedElement(ctx context.Context, idUser int, idElement int, idType int) error
+	Create_savedElement(ctx context.Context, idUser int, idElement int) error
 	Read_savedElements(ctx context.Context, idUser int) (*models.SavedElement, error)
 	Delete_savedElement(ctx context.Context, idElement int) error
 	Delete_allsavedElements(ctx context.Context, idUser int) error

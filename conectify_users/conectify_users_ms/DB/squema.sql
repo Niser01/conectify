@@ -23,7 +23,6 @@ create table USERS_SAVED_ELEMENTS (
     id int not null auto_increment,
     idUser int not null,
     idElement int not null,
-    idType int not null,
     PRIMARY KEY (id),
     foreign key (idUser) references USERS_PROFILE(id)
 );

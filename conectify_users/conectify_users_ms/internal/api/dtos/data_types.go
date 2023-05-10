@@ -33,7 +33,6 @@ type Edit_statusByid struct {
 type Create_savedElement struct {
 	IdUser    int `json:"idUser" validate:"required"`
 	IdElement int `json:"idElement" validate:"required"`
-	IdType    int `json:"idType" validate:"required"`
 }
 
 type Delete_savedElement struct {
