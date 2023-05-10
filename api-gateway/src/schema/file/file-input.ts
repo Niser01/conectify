@@ -1,5 +1,19 @@
 import { Field, InputType } from "type-graphql";
-import { Length, MaxLength, ArrayMaxSize } from "class-validator";
 
 @InputType()
-export default class NewFileInput {}
+export default class NewFileInput {  
+    @Field()
+    userId: string;
+  
+    @Field({ nullable: true })
+    channelId?: string;
+
+    @Field(type => [String], { nullable: true })
+    channelIds?: string[];
+  
+    @Field({ nullable: true })
+    filters?: string;
+  
+    @Field(type => [String], { nullable: true })
+    filesId?: string[];
+}

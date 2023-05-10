@@ -4,10 +4,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-import { InputType } from "type-graphql";
-let NewUserInput = class NewUserInput {
+import { Resolver } from "type-graphql";
+let CompositeResolver = class CompositeResolver {
 };
-NewUserInput = __decorate([
-    InputType()
-], NewUserInput);
-export default NewUserInput;
+CompositeResolver = __decorate([
+    Resolver()
+], CompositeResolver);
+export default CompositeResolver;

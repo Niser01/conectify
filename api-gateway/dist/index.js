@@ -15,9 +15,11 @@ import MessageResolver from "./schema/message/message-resolver.js";
 import UserResolver from "./schema/user/user-resolver.js";
 import ChannelResolver from "./schema/channel/channel-resolver.js";
 import FileResolver from "./schema/file/file-resolver.js";
+import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
+import CompositeResolver from "./schema/composite/composite-resolver.js";
 // ... Building schema here
 const schema = await buildSchema({
-    resolvers: [MessageResolver, UserResolver, ChannelResolver, FileResolver],
+    resolvers: [MessageResolver, UserResolver, ChannelResolver, FileResolver, CompositeResolver],
     validate: { forbidUnknownValues: false },
     // automatically create `schema.gql` file with schema definition in current folder
     emitSchemaFile: path.resolve(__dirname, "schema.gql"),
@@ -37,7 +39,7 @@ const server = new ApolloServer({
 await server.start();
 // Set up our Express middleware to handle CORS, body parsing,
 // and our expressMiddleware function.
-app.use('/', cors(), bodyParser.json(), 
+app.use('/', cors(), bodyParser.json(), graphqlUploadExpress({ maxFileSize: 26214400, maxFiles: 10 }), 
 // expressMiddleware accepts the same arguments:
 // an Apollo Server instance and optional configuration options
 expressMiddleware(server, {
