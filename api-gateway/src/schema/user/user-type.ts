@@ -29,7 +29,7 @@ export class User {
 @ObjectType()
 export class SavedElement{
     @Field(type => ID)
-    id: string;
+    ID: string;
 
     @Field()
     IDUser: number;

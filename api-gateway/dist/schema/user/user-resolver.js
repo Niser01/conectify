@@ -71,19 +71,23 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async userByLastName(names) {
-        let message = await axios.get(URL + "/users/lastNames_read/" + names)
+    /*
+    
+        @Query(returns => User)
+        async userByLastName(@Arg("lastNames") names: string ) {
+            let message = await axios.get(URL + "/users/lastNames_read/"+names)
             .then(function (response) {
-            if (response.status === 404) {
-                throw new Error("User's lastname not found");
-            }
-            return response.data;
-        })
-            .catch(function (error) {
-            console.log(error);
-        });
-        return message;
-    }
+                if (response.status === 404) {
+                  throw new Error("User's lastname not found" );
+                }
+                return response.data;
+              })
+              .catch(function (error) {
+                console.log(error);
+              });
+              return message;
+        }
+    */
     async userByPhone(phone) {
         let message = await axios.get(URL + "/users/phone_read/" + phone)
             .then(function (response) {
@@ -161,8 +165,8 @@ let UserResolver = class UserResolver {
             console.log(error);
         });
     }
-    async getSavedElementById(idElement) {
-        let message = await axios.get(URL + "/savedElement/" + idElement)
+    async getSavedElementByIdUser(idUser) {
+        let message = await axios.get(URL + "/savedElement/" + idUser)
             .then(function (response) {
             if (response.status === 404) {
                 throw new Error("SavedElement not found");
@@ -233,13 +237,6 @@ __decorate([
 ], UserResolver.prototype, "userByNames", null);
 __decorate([
     Query(returns => User),
-    __param(0, Arg("lastNames")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userByLastName", null);
-__decorate([
-    Query(returns => User),
     __param(0, Arg("phoneNumber")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -283,11 +280,11 @@ __decorate([
 ], UserResolver.prototype, "createSavedElement", null);
 __decorate([
     Query(returns => SavedElement),
-    __param(0, Arg("idElement")),
+    __param(0, Arg("idUser")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getSavedElementById", null);
+], UserResolver.prototype, "getSavedElementByIdUser", null);
 __decorate([
     Mutation(returns => String, { nullable: true }),
     __param(0, Arg("idElement")),

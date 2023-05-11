@@ -85,7 +85,7 @@ export default class UserResolver {
 
           return message;
     }
-
+/*
 
     @Query(returns => User)
     async userByLastName(@Arg("lastNames") names: string ) {
@@ -101,7 +101,7 @@ export default class UserResolver {
           });
           return message;
     }
-
+*/
 
     @Query(returns => User)
     async userByPhone(@Arg("phoneNumber") phone: string ) {
@@ -211,8 +211,8 @@ export default class UserResolver {
     }
 
     @Query(returns => SavedElement)
-    async getSavedElementById(@Arg("idElement") idElement: number){
-      let message = await axios.get(URL + "/savedElement/"+idElement)
+    async getSavedElementByIdUser (@Arg("idUser") idUser: number){
+      let message = await axios.get(URL + "/savedElement/"+idUser)
       .then(function (response) {
         if (response.status === 404) {
           throw new Error("SavedElement not found" );
