@@ -103,7 +103,7 @@ type Query {
 type SavedElement {
   IDElement: Float!
   IDUser: Float!
-  id: String!
+  id: ID!
 }
 
 """The `Upload` scalar type represents a file upload."""
@@ -111,7 +111,7 @@ scalar Upload
 
 type User {
   EMail: String!
-  ID: String!
+  ID: ID!
   LastNames: String!
   Names: String!
   PhoneNumber: String!

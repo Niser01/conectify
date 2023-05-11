@@ -1,9 +1,9 @@
 import "reflect-metadata";
-import { Field, ObjectType, ID, } from "type-graphql";
+import { Field, ObjectType, ID } from "type-graphql";
 
 @ObjectType()
 export class User {
-    @Field()
+    @Field(type => ID)
     ID: string;
 
     @Field()
@@ -28,7 +28,7 @@ export class User {
 
 @ObjectType()
 export class SavedElement{
-    @Field()
+    @Field(type => ID)
     id: string;
 
     @Field()

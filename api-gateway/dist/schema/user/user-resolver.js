@@ -13,8 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
 import { User, SavedElement } from "./user-type.js";
-import { port } from './user_server.js';
-const URL = `http://localhost:${port}/`;
+const URL = `http://localhost:8080`;
 let UserResolver = class UserResolver {
     async userCreate(Names, LastNames, PhotoId, EMail, Status, PhoneNumber) {
         let message = await axios.post(URL + "/users/create", {
