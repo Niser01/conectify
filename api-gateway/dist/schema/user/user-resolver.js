@@ -150,28 +150,6 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    /*
-    
-        @Mutation(returns => String, { nullable: true })
-        async createSavedElement(
-          @Arg("IdUser") IdUser: number,
-          @Arg("IdElement") IdElement: number,
-        ){
-          let message = await axios.post(URL + "/savedElement", {
-            IdUser: IdUser,
-            IdElement: IdElement,
-          })
-          .then(function (response) {
-            if (response.status === 404) {
-              throw new Error("SavedElement not created" );
-            }
-            return response.data;
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        }
-    */
     async getSavedElementByIdUser(idUser) {
         let message = await axios.get(URL + "/savedElement/" + idUser)
             .then(function (response) {

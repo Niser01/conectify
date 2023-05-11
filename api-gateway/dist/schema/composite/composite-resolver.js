@@ -10,30 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Resolver, Query, Arg, Mutation } from "type-graphql";
+import { Resolver, Arg, Mutation } from "type-graphql";
 import axios from "axios";
-import { SavedElement, MessageId } from "./composite-type.js";
+import { SavedElement } from "./composite-type.js";
 const URL = process.env.USERS_URL || "http://localhost:8080";
-const URL1 = process.env.MESSAGES_URL || "http://localhost/api/messages";
 let CompositeResolver = class CompositeResolver {
-    async MessagebyId(id) {
-        let message = await axios.get(URL1 + "/" + id)
-            .then(function (response) {
-            if (response.status === 404) {
-                throw new Error("Message not found");
-            }
-            return response.data;
-        })
-            .catch(function (error) {
-            console.log(error);
-        });
-        return message;
-    }
-    async pushSavedElement(idUser) {
-        let message = await axios.get(URL1 + "/" + idUser);
-        let user = await axios.post(URL + "/savedElement", {
-            IdUser: idUser,
-            IdElement: message,
+    async createSavedElement(IdUser, IdMessage) {
+        let message = await axios.post(URL + "/savedElement", {
+            IdUser: IdUser,
+            IdMessage: IdMessage,
         })
             .then(function (response) {
             if (response.status === 404) {
@@ -47,19 +32,13 @@ let CompositeResolver = class CompositeResolver {
     }
 };
 __decorate([
-    Query(returns => MessageId),
-    __param(0, Arg("id")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], CompositeResolver.prototype, "MessagebyId", null);
-__decorate([
     Mutation(returns => String, { nullable: true }),
-    __param(0, Arg("idUser")),
+    __param(0, Arg("IdUser")),
+    __param(1, Arg("IdMessage")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
-], CompositeResolver.prototype, "pushSavedElement", null);
+], CompositeResolver.prototype, "createSavedElement", null);
 CompositeResolver = __decorate([
     Resolver(SavedElement)
 ], CompositeResolver);

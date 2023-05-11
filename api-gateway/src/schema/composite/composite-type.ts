@@ -13,9 +13,3 @@ export class SavedElement{
     IDElement: number;
 
 }
-
-@ObjectType()
-export class MessageId {
-  @Field(type => ID)
-  _id: string;
-}
