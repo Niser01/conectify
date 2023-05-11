@@ -188,7 +188,7 @@ export default class UserResolver {
 
         return message;
     }
-
+/*
 
     @Mutation(returns => String, { nullable: true })
     async createSavedElement(
@@ -209,7 +209,7 @@ export default class UserResolver {
         console.log(error);
       });
     }
-
+*/
     @Query(returns => SavedElement)
     async getSavedElementByIdUser (@Arg("idUser") idUser: number){
       let message = await axios.get(URL + "/savedElement/"+idUser)

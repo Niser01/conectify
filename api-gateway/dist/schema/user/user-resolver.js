@@ -13,7 +13,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
 import { User, SavedElement } from "./user-type.js";
-const URL = `http://localhost:8080`;
+const URL = process.env.USERS_URL || "http://localhost:8080";
 let UserResolver = class UserResolver {
     async userCreate(Names, LastNames, PhotoId, EMail, Status, PhoneNumber) {
         let message = await axios.post(URL + "/users/create", {
@@ -150,21 +150,28 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async createSavedElement(IdUser, IdElement) {
-        let message = await axios.post(URL + "/savedElement", {
+    /*
+    
+        @Mutation(returns => String, { nullable: true })
+        async createSavedElement(
+          @Arg("IdUser") IdUser: number,
+          @Arg("IdElement") IdElement: number,
+        ){
+          let message = await axios.post(URL + "/savedElement", {
             IdUser: IdUser,
             IdElement: IdElement,
-        })
-            .then(function (response) {
+          })
+          .then(function (response) {
             if (response.status === 404) {
-                throw new Error("SavedElement not created");
+              throw new Error("SavedElement not created" );
             }
             return response.data;
-        })
-            .catch(function (error) {
+          })
+          .catch(function (error) {
             console.log(error);
-        });
-    }
+          });
+        }
+    */
     async getSavedElementByIdUser(idUser) {
         let message = await axios.get(URL + "/savedElement/" + idUser)
             .then(function (response) {
@@ -270,14 +277,6 @@ __decorate([
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "userEditStatus", null);
-__decorate([
-    Mutation(returns => String, { nullable: true }),
-    __param(0, Arg("IdUser")),
-    __param(1, Arg("IdElement")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, Number]),
-    __metadata("design:returntype", Promise)
-], UserResolver.prototype, "createSavedElement", null);
 __decorate([
     Query(returns => SavedElement),
     __param(0, Arg("idUser")),

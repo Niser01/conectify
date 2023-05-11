@@ -27,3 +27,13 @@ SavedElement = __decorate([
     ObjectType()
 ], SavedElement);
 export { SavedElement };
+let MessageId = class MessageId {
+};
+__decorate([
+    Field(type => ID),
+    __metadata("design:type", String)
+], MessageId.prototype, "_id", void 0);
+MessageId = __decorate([
+    ObjectType()
+], MessageId);
+export { MessageId };

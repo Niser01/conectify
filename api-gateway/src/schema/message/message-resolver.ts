@@ -7,6 +7,10 @@ const URL = "http://localhost/api/messages";
 
 @Resolver(Message)
 export default class MessageResolver {
+ 
+
+
+
   @Query(returns => Message)
   async message(@Arg("id") id: string) {
     let message = await axios.get(URL + "/" + id)

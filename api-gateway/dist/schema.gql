@@ -48,15 +48,19 @@ type MessageAsThread {
   visible: Boolean!
 }
 
+type MessageId {
+  _id: ID!
+}
+
 type Mutation {
   createMessage(newMessageData: NewMessageInput!): String
-  createSavedElement(IdElement: Float!, IdUser: Float!): String
   deleteAllSavedElement(idUser: Float!): String
   deleteFile(fileId: String!, userId: String!): String
   deleteFileFromMessage(fileId: String!, id: String!, userId: String!): String
   deleteMessage(id: String!, userId: String!): String
   deleteSavedElement(idElement: Float!): String
   editMessage(content: String!, id: String!, userId: String!): String
+  pushSavedElement(idUser: Float!): String
   reactToMessage(id: String!, reaction: String!, userId: String!): String
   toggleMessageVisibility(id: String!, userId: String!): String
   uploadFile(channelId: String!, file: Upload!, userId: String!): File!
@@ -86,6 +90,7 @@ input NewMessageInput {
 }
 
 type Query {
+  MessagebyId(id: String!): MessageId!
   getFilesByIds(fileInput: NewFileInput!): [File!]!
   getFilesOfUser(fileInput: NewFileInput!): [File!]!
   getSavedElementByIdUser(idUser: Float!): SavedElement!
