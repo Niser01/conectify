@@ -3,7 +3,7 @@ import axios from "axios";
 import { User, SavedElement } from "./user-type.js";
 import { url, port } from './user_server.js';
 
-const URL = `http://localhost:8080`;
+const URL = process.env.USERS_URL || "http://localhost:8080";
 
 @Resolver(User)
 export default class UserResolver {
