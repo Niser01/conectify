@@ -188,7 +188,7 @@ export default class UserResolver {
 
         return message;
     }
-
+    
     @Query(returns => SavedElement)
     async getSavedElementByIdUser (@Arg("idUser") idUser: number){
       let message = await axios.get(URL + "/savedElement/"+idUser)
