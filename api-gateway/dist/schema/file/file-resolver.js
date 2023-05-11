@@ -17,7 +17,7 @@ import NewFileInput from "./file-input.js";
 import GraphQLUpload from "graphql-upload/GraphQLUpload.mjs";
 import FormData from "form-data";
 import amqp from "amqplib/callback_api.js";
-const URL = "http://localhost:8080";
+const URL = process.env.FILES_URL || "http://localhost:8080";
 let FileResolver = class FileResolver {
     async getFilesByIds(fileInput) {
         if (fileInput.filesId == null) {

@@ -14,7 +14,7 @@ import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
 import { Message, MessageAsThread } from "./message-type.js";
 import NewMessageInput from "./message-input.js";
-const URL = "http://localhost/api/messages";
+const URL = process.env.MESSAGES_URL || "http://localhost/api/messages";
 let MessageResolver = class MessageResolver {
     async message(id) {
         let message = await axios.get(URL + "/" + id)

@@ -9,7 +9,7 @@ import { Readable } from "stream";
 import amqp from "amqplib/callback_api.js";
 
 
-const URL = "http://localhost:8080";
+const URL = process.env.FILES_URL || "http://localhost:8080";
 
 @Resolver()
 export default class FileResolver {
