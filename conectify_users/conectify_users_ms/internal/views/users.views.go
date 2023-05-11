@@ -13,23 +13,23 @@ const (
 	insert into USERS_PROFILE (names, lastNames, photoId, eMail, status, phoneNumber) 
 	values (?, ?, ?, ?, ?, ?)`
 	queryread_userByid = `
-	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT *
 	FROM USERS_PROFILE 
 	WHERE id = ?`
 	queryread_userByemail = `
-	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT *
 	FROM USERS_PROFILE 
 	WHERE eMail = ?`
 	queryread_userByname = `
-	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT *
 	FROM USERS_PROFILE 
 	WHERE names = ?`
 	queryread_userBylastname = `
-	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT *
 	FROM USERS_PROFILE 
 	WHERE lastNames = ?`
 	queryread_userBypnumber = `
-	SELECT id, names, lastNames, photoId, eMail, status, phoneNumber
+	SELECT *
 	FROM USERS_PROFILE 
 	WHERE phoneNumber = ?`
 	queryupdate_userByid = `
@@ -48,7 +48,7 @@ const (
 	INSERT INTO USERS_SAVED_ELEMENTS (idUser, idElement)
 	VALUES (?, ?)`
 	queryread_savedElements = `
-	SELECT idUser, idElement
+	SELECT  *
 	FROM USERS_SAVED_ELEMENTS 
 	WHERE idUser = ?`
 	querydelete_savedElement = `
