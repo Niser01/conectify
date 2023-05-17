@@ -9,7 +9,11 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-//handlers for the API
+//Handlers for the API
+//There is a handdler for each route that was created, each handler calls the respective view that is defined
+//If there is an error with the request each handler throws an exception
+//The handlers that recevies a parametes through the URL, that parameter is recived by the echo context and used in the query
+//All the other handlers use the dtos parameters since the parameters are given by a JSON format.
 
 func (a *API) Create_User(c echo.Context) error {
 	ctx := c.Request().Context()
@@ -63,14 +67,13 @@ func (a *API) Read_userByemail(c echo.Context) error {
 }
 
 func (a *API) Read_userByname(c echo.Context) error {
-	ctx := c.Request().Context()
 	Names := c.Param("names")
 	err := c.Bind(&Names)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	user, err := a.view.Read_userByname(ctx, Names)
+	user, err := a.view.Read_userByname(Names)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
@@ -79,14 +82,13 @@ func (a *API) Read_userByname(c echo.Context) error {
 }
 
 func (a *API) Read_userBylastname(c echo.Context) error {
-	ctx := c.Request().Context()
 	LastNames := c.Param("lastNames")
 	err := c.Bind(&LastNames)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	user, err := a.view.Read_userBylastname(ctx, LastNames)
+	user, err := a.view.Read_userBylastname(LastNames)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
@@ -95,14 +97,13 @@ func (a *API) Read_userBylastname(c echo.Context) error {
 }
 
 func (a *API) Read_userBypnumber(c echo.Context) error {
-	ctx := c.Request().Context()
 	PhoneNumber := c.Param("phoneNumber")
 	err := c.Bind(&PhoneNumber)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	user, err := a.view.Read_userBypnumber(ctx, PhoneNumber)
+	user, err := a.view.Read_userBypnumber(PhoneNumber)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
@@ -175,14 +176,13 @@ func (a *API) Create_savedElement(c echo.Context) error {
 }
 
 func (a *API) Read_savedElements(c echo.Context) error {
-	ctx := c.Request().Context()
 	idElement := c.Param("idElement")
 	idnum, err := strconv.Atoi(idElement)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	elements, err := a.view.Read_savedElements(ctx, idnum)
+	elements, err := a.view.Read_savedElements(idnum)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}

@@ -3,6 +3,8 @@ package api
 import "github.com/labstack/echo/v4"
 
 //routes for users
+//the section that is ":id" is where the 1 id the user is placed to make the search
+//the routes are divided by users and saved element, to give order to the requests
 
 func (a *API) RegisterRoutes(e *echo.Echo) {
 	users := e.Group("/users")
@@ -10,7 +12,7 @@ func (a *API) RegisterRoutes(e *echo.Echo) {
 	users.GET("/id_read/:id", a.Read_userByid)
 	users.GET("/email_read/:eMail", a.Read_userByemail)
 	users.GET("/name_read/:names", a.Read_userByname)
-	users.GET("lastname_read/:lastNames", a.Read_userBylastname)
+	users.GET("/lastname_read/:lastNames", a.Read_userBylastname)
 	users.GET("/phone_read/:phoneNumber", a.Read_userBypnumber)
 	users.PUT("/update", a.Update_userByid)
 	users.DELETE("/delete/:id", a.Delete_userByid)
