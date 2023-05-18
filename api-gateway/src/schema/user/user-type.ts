@@ -40,3 +40,41 @@ export class SavedElement{
 }
 
 
+@ObjectType()
+export class Message {
+  @Field(type => ID)
+  _id: string;
+
+  @Field()
+  userId: string;
+
+  @Field({ nullable: true })
+  content?: string;
+
+  @Field()
+  edited: boolean;
+
+  @Field()
+  channelId: string;
+
+  @Field({ nullable: true })
+  thread?: string;
+
+  @Field()
+  visible: boolean;
+
+  @Field(type => [String], { nullable: true })
+  replies?: string[];
+
+  @Field({ nullable: true })
+  reactions?: string;
+
+  @Field(type => [String], { nullable: true })
+  filesId?: string[];
+
+  @Field()
+  updated_at: Date;
+
+  @Field()
+  created_at: Date;
+}

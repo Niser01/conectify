@@ -61,3 +61,57 @@ SavedElement = __decorate([
     ObjectType()
 ], SavedElement);
 export { SavedElement };
+let Message = class Message {
+};
+__decorate([
+    Field(type => ID),
+    __metadata("design:type", String)
+], Message.prototype, "_id", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", String)
+], Message.prototype, "userId", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
+], Message.prototype, "content", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", Boolean)
+], Message.prototype, "edited", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", String)
+], Message.prototype, "channelId", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
+], Message.prototype, "thread", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", Boolean)
+], Message.prototype, "visible", void 0);
+__decorate([
+    Field(type => [String], { nullable: true }),
+    __metadata("design:type", Array)
+], Message.prototype, "replies", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
+], Message.prototype, "reactions", void 0);
+__decorate([
+    Field(type => [String], { nullable: true }),
+    __metadata("design:type", Array)
+], Message.prototype, "filesId", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", Date)
+], Message.prototype, "updated_at", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", Date)
+], Message.prototype, "created_at", void 0);
+Message = __decorate([
+    ObjectType()
+], Message);
+export { Message };

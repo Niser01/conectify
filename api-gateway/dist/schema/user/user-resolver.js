@@ -150,10 +150,39 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
+    /*
+      @Query(returns => [Message])
+      async messages() {
+        let messages = await axios.get(URL)
+        .then(function (response) {
+          return response.data;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+        for (let i = 0; i < messages.length; i++) {
+          this.transformToGraphql(messages[i]);
+        }
+        return messages;
+      }
+    
+    
+    
+    */
     async createSavedElement(IdUser, IdElement) {
+        let messages = await axios.get(URLMessages)
+            .then(function (response) {
+            return response.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+        for (let i = 0; i < messages.length; i++) {
+            this.transformToGraphql(messages[i]);
+        }
         let message = await axios.post(URL + "/savedElement/create", {
             IdUser: IdUser,
-            IdElement: IdElement,
+            IdElement: messages._id,
         })
             .then(function (response) {
             if (response.status === 404) {
@@ -201,6 +230,16 @@ let UserResolver = class UserResolver {
             .catch(function (error) {
             console.log(error);
         });
+    }
+    transformToGraphql(message) {
+        if (Array.isArray(message.reactions)) {
+            message.reactions = '{' + message.reactions.toString() + '}';
+        }
+        else {
+            message.reactions = JSON.stringify(message.reactions);
+        }
+        message.created_at = new Date(message.created_at);
+        message.updated_at = new Date(message.updated_at);
     }
 };
 __decorate([
