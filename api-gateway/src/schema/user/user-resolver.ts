@@ -86,8 +86,7 @@ export default class UserResolver {
           .catch(function (error) {
             console.log(error);
           });
-
-          return message;
+          return message; 
     }
 
 
@@ -194,33 +193,6 @@ export default class UserResolver {
     }
 
 
-
-
-/*
-  @Query(returns => [Message])
-  async messages() {
-    let messages = await axios.get(URL)
-    .then(function (response) {
-      return response.data;
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-    for (let i = 0; i < messages.length; i++) {
-      this.transformToGraphql(messages[i]);
-    }
-    return messages;
-  }
-
-
-
-*/
-
-
-
-
-
-
     @Mutation(returns => String, {nullable: true})
     async createSavedElement(
       @Arg("IdUser") IdUser: number,
@@ -237,7 +209,7 @@ export default class UserResolver {
           this.transformToGraphql(messages[i]);
         }
 
-
+        
         let message = await axios.post(URL + "/savedElement/create", {
           IdUser: IdUser,
           IdElement: messages._id,            

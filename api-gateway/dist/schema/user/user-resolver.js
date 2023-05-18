@@ -150,25 +150,6 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    /*
-      @Query(returns => [Message])
-      async messages() {
-        let messages = await axios.get(URL)
-        .then(function (response) {
-          return response.data;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-        for (let i = 0; i < messages.length; i++) {
-          this.transformToGraphql(messages[i]);
-        }
-        return messages;
-      }
-    
-    
-    
-    */
     async createSavedElement(IdUser, IdElement) {
         let messages = await axios.get(URLMessages)
             .then(function (response) {
