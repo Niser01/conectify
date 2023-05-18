@@ -3,7 +3,8 @@ import axios from "axios";
 import { User, SavedElement } from "./user-type.js";
 import { url, port } from './user_server.js';
 
-const URL = process.env.USERS_URL || "http://localhost:8080";
+const URL =  "http://localhost:8080";
+//process.env.USERS_URL ||
 
 @Resolver(User)
 export default class UserResolver {
@@ -85,11 +86,11 @@ export default class UserResolver {
 
           return message;
     }
-/*
+
 
     @Query(returns => User)
-    async userByLastName(@Arg("lastNames") names: string ) {
-        let message = await axios.get(URL + "/users/lastNames_read/"+names)
+    async userByLastName(@Arg("lastNames") lastNames: string ) {
+        let message = await axios.get(URL + "/users/lastNames_read/"+lastNames)
         .then(function (response) {
             if (response.status === 404) {  
               throw new Error("User's lastname not found" );
@@ -101,7 +102,7 @@ export default class UserResolver {
           });
           return message;
     }
-*/
+
 
     @Query(returns => User)
     async userByPhone(@Arg("phoneNumber") phone: string ) {

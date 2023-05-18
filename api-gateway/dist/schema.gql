@@ -95,6 +95,7 @@ type Query {
   searchMessages(search: String!): [Message!]!
   userByEmail(eMail: String!): User!
   userById(id: String!): User!
+  userByLastName(lastNames: String!): User!
   userByNames(names: String!): User!
   userByPhone(phoneNumber: String!): User!
 }

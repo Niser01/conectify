@@ -13,7 +13,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
 import { User, SavedElement } from "./user-type.js";
-const URL = process.env.USERS_URL || "http://localhost:8080";
+const URL = "http://localhost:8080";
+//process.env.USERS_URL ||
 let UserResolver = class UserResolver {
     async userCreate(Names, LastNames, PhotoId, EMail, Status, PhoneNumber) {
         let message = await axios.post(URL + "/users/create", {
@@ -71,23 +72,19 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    /*
-    
-        @Query(returns => User)
-        async userByLastName(@Arg("lastNames") names: string ) {
-            let message = await axios.get(URL + "/users/lastNames_read/"+names)
+    async userByLastName(lastNames) {
+        let message = await axios.get(URL + "/users/lastNames_read/" + lastNames)
             .then(function (response) {
-                if (response.status === 404) {
-                  throw new Error("User's lastname not found" );
-                }
-                return response.data;
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-              return message;
-        }
-    */
+            if (response.status === 404) {
+                throw new Error("User's lastname not found");
+            }
+            return response.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+        return message;
+    }
     async userByPhone(phone) {
         let message = await axios.get(URL + "/users/phone_read/" + phone)
             .then(function (response) {
@@ -220,6 +217,13 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "userByNames", null);
+__decorate([
+    Query(returns => User),
+    __param(0, Arg("lastNames")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "userByLastName", null);
 __decorate([
     Query(returns => User),
     __param(0, Arg("phoneNumber")),
