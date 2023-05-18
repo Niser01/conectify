@@ -74,23 +74,26 @@ export default class UserResolver {
         return message;
     }
 
-    @Query(returns => User)
+    @Query(returns => [User])
     async userByNames(@Arg("names") names: string ) {
-        let message = await axios.get(URL + "/users/names_read/"+names)
+        let message = await axios.get(URL + "/users/name_read/"+names)
         .then(function (response) {
             if (response.status === 404) {
               throw new Error("User name not found" );
             }
             return response.data;
+          })
+          .catch(function (error) {
+            console.log(error);
           });
 
           return message;
     }
 
 
-    @Query(returns => User)
+    @Query(returns => [User])
     async userByLastName(@Arg("lastNames") lastNames: string ) {
-        let message = await axios.get(URL + "/users/lastNames_read/"+lastNames)
+        let message = await axios.get(URL + "/users/lastname_read/"+lastNames)
         .then(function (response) {
             if (response.status === 404) {  
               throw new Error("User's lastname not found" );
@@ -104,7 +107,7 @@ export default class UserResolver {
     }
 
 
-    @Query(returns => User)
+    @Query(returns =>  [User])
     async userByPhone(@Arg("phoneNumber") phone: string ) {
         let message = await axios.get(URL + "/users/phone_read/"+phone)
         .then(function (response) {
@@ -131,7 +134,7 @@ export default class UserResolver {
       @Arg("Status") Status: number,
       @Arg("PhoneNumber") PhoneNumber: string,
       ) {
-        let message = await axios.put(URL + "/users/update/", {
+        let message = await axios.put(URL + "/users/update", {
           Names: Names,
           LastNames: LastNames,
           PhotoId: PhotoId,
@@ -189,10 +192,33 @@ export default class UserResolver {
 
         return message;
     }
+
+
+    @Mutation(returns => String, {nullable: true})
+    async createSavedElement(
+      @Arg("IdUser") IdUser: number,
+      @Arg("IdElement") IdElement: number){
+        let message = await axios.post(URL + "/savedElement/create", {
+          IdUser: IdUser,
+          IdElement: IdElement,            
+        })
+        .then(function (response) {
+            if (response.status === 404) {
+              throw new Error("User not created" );
+            }
+            return response.data;
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        return message;
+      }
     
-    @Query(returns => SavedElement)
+    
+    @Query(returns => [SavedElement])
     async getSavedElementByIdUser (@Arg("idUser") idUser: number){
-      let message = await axios.get(URL + "/savedElement/"+idUser)
+      let message = await axios.get(URL + "/savedElement/id_read/"+idUser)
       .then(function (response) {
         if (response.status === 404) {
           throw new Error("SavedElement not found" );
@@ -206,7 +232,7 @@ export default class UserResolver {
 
     @Mutation(returns => String, { nullable: true })
     async deleteSavedElement(@Arg("idElement") idElement: number){
-      let message = await axios.delete(URL + "/savedElement/"+idElement)
+      let message = await axios.delete(URL + "/savedElement/delete/"+idElement)
       .then(function (response) {
         if (response.status === 404) {
           throw new Error("SavedElement not deleted" );
@@ -220,7 +246,7 @@ export default class UserResolver {
 
     @Mutation(returns => String, { nullable: true })
     async deleteAllSavedElement(@Arg("idUser") idUser: number){
-      let message = await axios.delete(URL + "/savedElement/deleteAll/"+idUser)
+      let message = await axios.delete(URL + "/savedElement/delete_all/"+idUser)
       .then(function (response) {
         if (response.status === 404) {
           throw new Error("SavedElement not deleted" );
@@ -231,7 +257,6 @@ export default class UserResolver {
         console.log(error);
       });
     }
-
 
 }
 

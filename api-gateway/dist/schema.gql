@@ -88,16 +88,16 @@ input NewMessageInput {
 type Query {
   getFilesByIds(fileInput: NewFileInput!): [File!]!
   getFilesOfUser(fileInput: NewFileInput!): [File!]!
-  getSavedElementByIdUser(idUser: Float!): SavedElement!
+  getSavedElementByIdUser(idUser: Float!): [SavedElement!]!
   message(id: String!): Message!
   messageAsThread(id: String!): MessageAsThread!
   messages: [Message!]!
   searchMessages(search: String!): [Message!]!
   userByEmail(eMail: String!): User!
   userById(id: String!): User!
-  userByLastName(lastNames: String!): User!
-  userByNames(names: String!): User!
-  userByPhone(phoneNumber: String!): User!
+  userByLastName(lastNames: String!): [User!]!
+  userByNames(names: String!): [User!]!
+  userByPhone(phoneNumber: String!): [User!]!
 }
 
 type SavedElement {
