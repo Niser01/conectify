@@ -14,6 +14,7 @@ import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
 import { User, SavedElement } from "./user-type.js";
 const URL = process.env.USERS_URL || "http://localhost:8080";
+const URLMessages = process.env.MESSAGES_URL || "http://localhost/api/messages";
 let UserResolver = class UserResolver {
     async userCreate(Names, LastNames, PhotoId, EMail, Status, PhoneNumber) {
         let message = await axios.post(URL + "/users/create", {
