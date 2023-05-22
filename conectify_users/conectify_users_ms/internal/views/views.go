@@ -16,14 +16,13 @@ type View_interface interface {
 	Read_userByname(names string) ([]models.User, error)
 	Read_userBylastname(lastNames string) ([]models.User, error)
 	Read_userBypnumber(phoneNumber string) ([]models.User, error)
-
 	Read_idBySSOId(SSO_UserId string) ([]models.UserId, error)
+	Update_photoId(ctx context.Context, photoId string, id int) error
+	Update_userByid(ctx context.Context, names string, lastNames string, photoId string, eMail string, status int, phoneNumber string, SSO_UserId string, id int) error
 
-	Update_photoId(ctx context.Context, id int, photoId string) error
-
-	Update_userByid(ctx context.Context, id int, names string, lastNames string, photoId string, eMail string, status int, phoneNumber string, SSO_UserId string) error
 	Delete_userByid(ctx context.Context, id int) error
-	Edit_statusByid(ctx context.Context, id int, status int) error
+
+	Edit_statusByid(ctx context.Context, status int, id int) error
 
 	Create_savedElement(ctx context.Context, idUser int, idElement int) error
 	Read_savedElements(idUser int) ([]models.SavedElement, error)

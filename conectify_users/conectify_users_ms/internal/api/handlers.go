@@ -150,11 +150,10 @@ func (a *API) Update_photoId(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	err = a.view.Update_photoId(ctx, params.Id, params.PhotoId)
+	err = a.view.Update_photoId(ctx, params.PhotoId, params.Id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
-
 	return c.JSON(http.StatusOK, nil)
 }
 
@@ -166,7 +165,7 @@ func (a *API) Update_userByid(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	err = a.view.Update_userByid(ctx, params.Id, params.Names, params.LastNames, params.PhotoId, params.EMail, params.Status, params.PhoneNumber, params.SSO_UserId)
+	err = a.view.Update_userByid(ctx, params.Names, params.LastNames, params.PhotoId, params.EMail, params.Status, params.PhoneNumber, params.SSO_UserId, params.Id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
@@ -176,13 +175,13 @@ func (a *API) Update_userByid(c echo.Context) error {
 
 func (a *API) Delete_userByid(c echo.Context) error {
 	ctx := c.Request().Context()
-	Id := c.Param("id")
-	idnum, err := strconv.Atoi(Id)
+	params := dtos.Delete_userByid{}
+	err := c.Bind(&params)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	err = a.view.Delete_userByid(ctx, idnum)
+	err = a.view.Delete_userByid(ctx, params.Id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
@@ -198,7 +197,7 @@ func (a *API) Edit_statusByid(c echo.Context) error {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	err = a.view.Edit_statusByid(ctx, params.Id, params.Status)
+	err = a.view.Edit_statusByid(ctx, params.Status, params.Id)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
@@ -239,13 +238,13 @@ func (a *API) Read_savedElements(c echo.Context) error {
 
 func (a *API) Delete_savedElement(c echo.Context) error {
 	ctx := c.Request().Context()
-	idElement := c.Param("idElement")
-	idnum, err := strconv.Atoi(idElement)
+	params := dtos.Delete_savedElement{}
+	err := c.Bind(&params)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	err = a.view.Delete_savedElement(ctx, idnum)
+	err = a.view.Delete_savedElement(ctx, params.IdElement)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}
@@ -255,13 +254,13 @@ func (a *API) Delete_savedElement(c echo.Context) error {
 
 func (a *API) Delete_allsavedElements(c echo.Context) error {
 	ctx := c.Request().Context()
-	idUser := c.Param("idUser")
-	idnum, err := strconv.Atoi(idUser)
+	params := dtos.Delete_allsavedElements{}
+	err := c.Bind(&params)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}
 
-	err = a.view.Delete_allsavedElements(ctx, idnum)
+	err = a.view.Delete_allsavedElements(ctx, params.IdUser)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, err)
 	}

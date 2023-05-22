@@ -20,5 +20,4 @@ type UserId struct {
 type SavedElement struct {
 	IDUser    int `db:"idUser"`
 	IDElement int `db:"idElement"`
-	IDType    int `db:"idType"`
 }

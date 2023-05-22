@@ -40,12 +40,10 @@ const (
 	SELECT id
 	FROM USERS_PROFILE 
 	WHERE sso_userId = ?`
-
 	queryupdate_photoId = `
 	UPDATE USERS_PROFILE 
 	SET photoId = ?
 	WHERE id = ?`
-
 	queryupdate_userByid = `
 	UPDATE USERS_PROFILE 
 	SET names = ?, lastNames = ?, photoId = ?, eMail = ?, status = ?, phoneNumber = ? , sso_userId = ?
@@ -62,7 +60,7 @@ const (
 	INSERT INTO USERS_SAVED_ELEMENTS (idUser, idElement)
 	VALUES (?, ?)`
 	queryread_savedElements = `
-	SELECT  *
+	SELECT  idUser, idElement
 	FROM USERS_SAVED_ELEMENTS 
 	WHERE idUser = ?`
 	querydelete_savedElement = `
@@ -165,8 +163,8 @@ func (r *View_struct) Read_idBySSOId(SSO_UserId string) ([]models.UserId, error)
 }
 
 // updates the reference of the photo id
-func (r *View_struct) Update_photoId(ctx context.Context, id int, photoId string) error {
-	_, err := r.db.ExecContext(ctx, queryupdate_photoId, id, photoId)
+func (r *View_struct) Update_photoId(ctx context.Context, photoId string, id int) error {
+	_, err := r.db.ExecContext(ctx, queryupdate_photoId, photoId, id)
 	if err != nil {
 		return err
 	}
@@ -174,8 +172,8 @@ func (r *View_struct) Update_photoId(ctx context.Context, id int, photoId string
 }
 
 // This function updates the user information, the user is selected by it´s id,  it uses the ExcecContext method
-func (r *View_struct) Update_userByid(ctx context.Context, id int, names string, lastNames string, photoId string, eMail string, status int, phoneNumber string, SSO_UserId string) error {
-	_, err := r.db.ExecContext(ctx, queryupdate_userByid, id, names, lastNames, photoId, eMail, status, phoneNumber, SSO_UserId)
+func (r *View_struct) Update_userByid(ctx context.Context, names string, lastNames string, photoId string, eMail string, status int, phoneNumber string, SSO_UserId string, id int) error {
+	_, err := r.db.ExecContext(ctx, queryupdate_userByid, names, lastNames, photoId, eMail, status, phoneNumber, SSO_UserId, id)
 	if err != nil {
 		return err
 	}
@@ -192,7 +190,7 @@ func (r *View_struct) Delete_userByid(ctx context.Context, id int) error {
 }
 
 // This function edits the status of a user  it uses the ExcecContext method
-func (r *View_struct) Edit_statusByid(ctx context.Context, id int, status int) error {
+func (r *View_struct) Edit_statusByid(ctx context.Context, status int, id int) error {
 	_, err := r.db.ExecContext(ctx, queryedit_statusByid, status, id)
 	if err != nil {
 		return err
