@@ -1,7 +1,6 @@
 import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
 import { User,UserId, SavedElement } from "./user-type.js";
-import { print } from "graphql";
 
 
 const URL = process.env.USERS_URL || "http://localhost:8080";
@@ -350,7 +349,7 @@ export default class UserResolver {
       })
       .then(function (response) {
         if (response.status === 404) {
-          throw new Error("SavedElement not deleted" );
+          throw new Error("SavedElements not deleted" );
         }
         return response.data;
       })

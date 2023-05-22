@@ -264,7 +264,7 @@ let UserResolver = class UserResolver {
         })
             .then(function (response) {
             if (response.status === 404) {
-                throw new Error("SavedElement not deleted");
+                throw new Error("SavedElements not deleted");
             }
             return response.data;
         })
