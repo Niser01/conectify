@@ -5,20 +5,27 @@ package dtos
 type Create_User struct {
 	Names       string `json:"names"  validate:"required" ` //is a tag that validates that the field is not empty
 	LastNames   string `json:"lastNames" validate:"required"`
-	PhotoId     int    `json:"photoId" validate:"required"`
+	PhotoId     string `json:"photoId" validate:"required"`
 	EMail       string `json:"eMail" validate:"required ,min=8"` // validate:"required ,min=8" is a tag that validates that the field is not empty and has a minimum length of 8
 	Status      int    `json:"status" validate:"required"`
 	PhoneNumber string `json:"phoneNumber" validate:"required,min=10,max=10"` // validate:"required,min=10,max=10" is a tag that validates that the field is not empty and has a minimum length of 10 and a maximum length of 10
+	SSO_UserId  string `json:"sso_userId" validate:"required"`
 }
 
 type Update_userByid struct {
 	Id          int    `json:"id" validate:"required"`
 	Names       string `json:"names" validate:"required"`
 	LastNames   string `json:"lastNames" validate:"required"`
-	PhotoId     int    `json:"photoId" validate:"required"`
+	PhotoId     string `json:"photoId" validate:"required"`
 	EMail       string `json:"eMail" validate:"required"`
 	Status      int    `json:"status" validate:"required"`
 	PhoneNumber string `json:"phoneNumber" validate:"required"`
+	SSO_UserId  string `json:"sso_userId" validate:"required"`
+}
+
+type Update_photoId struct {
+	Id      int    `json:"id" validate:"required"`
+	PhotoId string `json:"photoId" validate:"required"`
 }
 
 type Delete_userByid struct {
