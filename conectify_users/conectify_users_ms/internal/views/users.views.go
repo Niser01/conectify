@@ -43,7 +43,7 @@ const (
 
 	queryupdate_photoId = `
 	UPDATE USERS_PROFILE 
-	SET photoid= ?
+	SET photoId = ?
 	WHERE id = ?`
 
 	queryupdate_userByid = `
@@ -154,6 +154,7 @@ func (r *View_struct) Read_userBypnumber(phoneNumber string) ([]models.User, err
 	return u, nil
 }
 
+// Gets the id of the user using the sso_id
 func (r *View_struct) Read_idBySSOId(SSO_UserId string) ([]models.UserId, error) {
 	u := []models.UserId{}
 	err := r.db.Select(&u, queryread_userBySSOID, SSO_UserId)
@@ -163,6 +164,7 @@ func (r *View_struct) Read_idBySSOId(SSO_UserId string) ([]models.UserId, error)
 	return u, nil
 }
 
+// updates the reference of the photo id
 func (r *View_struct) Update_photoId(ctx context.Context, id int, photoId string) error {
 	_, err := r.db.ExecContext(ctx, queryupdate_photoId, id, photoId)
 	if err != nil {
