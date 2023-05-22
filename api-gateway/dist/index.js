@@ -18,7 +18,7 @@ import FileResolver from "./schema/file/file-resolver.js";
 import graphqlUploadExpress from "graphql-upload/graphqlUploadExpress.mjs";
 // ... Building schema here
 const schema = await buildSchema({
-    resolvers: [MessageResolver, UserResolver, ChannelResolver, FileResolver],
+    resolvers: [MessageResolver, UserResolver, /*SSOResolver,*/ ChannelResolver, FileResolver],
     validate: { forbidUnknownValues: false },
     // automatically create `schema.gql` file with schema definition in current folder
     emitSchemaFile: path.resolve(__dirname, "schema.gql"),

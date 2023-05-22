@@ -49,23 +49,24 @@ type MessageAsThread {
 }
 
 type Mutation {
+  Create_User(EMail: String!, LastNames: String!, Names: String!, PhoneNumber: String!, PhotoId: String!, SSO_UserId: String!, Status: Float!): String
+  Create_savedElement(IdElement: Float!, IdUser: Float!): String
+  Delete_allsavedElements(IdUser: Float!): String
+  Delete_savedElement(IdElement: Float!): String
+  Delete_userByid(Id: Float!): String
+  Edit_statusByid(Id: Float!, Status: Float!): String
+  Update_photoId(Id: Float!, PhotoId: String!): String
+  Update_userByid(EMail: String!, Id: Float!, LastNames: String!, Names: String!, PhoneNumber: String!, PhotoId: String!, SSO_UserId: String!, Status: Float!): String
   createMessage(newMessageData: NewMessageInput!): String
-  createSavedElement(IdElement: Float!, IdUser: Float!): String
-  deleteAllSavedElement(idUser: Float!): String
   deleteFile(fileId: String!, userId: String!): String
   deleteFileFromMessage(fileId: String!, id: String!, userId: String!): String
   deleteMessage(id: String!, userId: String!): String
-  deleteSavedElement(idElement: Float!): String
   editMessage(content: String!, id: String!, userId: String!): String
   reactToMessage(id: String!, reaction: String!, userId: String!): String
   toggleMessageVisibility(id: String!, userId: String!): String
   uploadFile(channelId: String!, file: Upload!, userId: String!): File!
   uploadFileURL(channelId: String!, fileId: String!, fileURL: String!, userId: String!): String!
   uploadFiles(channelId: String!, files: [Upload!]!, userId: String!): [File!]!
-  userCreate(EMail: String!, LastNames: String!, Names: String!, PhoneNumber: String!, PhotoId: Float!, Status: Float!): String
-  userDelete(id: String!): String
-  userEditStatus(Id: Float!, Status: Float!): String
-  userUpdate(EMail: String!, Id: String!, LastNames: String!, Names: String!, PhoneNumber: String!, PhotoId: Float!, Status: Float!): String
 }
 
 input NewFileInput {
@@ -86,22 +87,23 @@ input NewMessageInput {
 }
 
 type Query {
+  Read_idBySSOId(SSO_UserId: String!): [UserId!]!
+  Read_idByemail(eMail: String!): [UserId!]!
+  Read_savedElements(idUser: Float!): [SavedElement!]!
+  Read_userByemail(eMail: String!): User!
+  Read_userByid(id: String!): User!
+  Read_userBylastname(lastNames: String!): [User!]!
+  Read_userByname(names: String!): [User!]!
+  Read_userBypnumber(phoneNumber: String!): [User!]!
   getFilesByIds(fileInput: NewFileInput!): [File!]!
   getFilesOfUser(fileInput: NewFileInput!): [File!]!
-  getSavedElementByIdUser(idUser: Float!): [SavedElement!]!
   message(id: String!): Message!
   messageAsThread(id: String!): MessageAsThread!
   messages: [Message!]!
   searchMessages(search: String!): [Message!]!
-  userByEmail(eMail: String!): User!
-  userById(id: String!): User!
-  userByLastName(lastNames: String!): [User!]!
-  userByNames(names: String!): [User!]!
-  userByPhone(phoneNumber: String!): [User!]!
 }
 
 type SavedElement {
-  ID: ID!
   IDElement: Float!
   IDUser: Float!
 }
@@ -115,6 +117,11 @@ type User {
   LastNames: String!
   Names: String!
   PhoneNumber: String!
-  PhotoId: Float!
+  PhotoId: String!
+  SSO_UserId: String!
   Status: Float!
+}
+
+type UserId {
+  ID: ID!
 }

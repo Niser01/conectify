@@ -1,41 +1,49 @@
 import "reflect-metadata";
 import { Field, ObjectType, ID } from "type-graphql";
 
+//Created the object types of the user_models
+
 @ObjectType()
 export class User {
-    @Field(type => ID)
-    ID: string;
+  @Field(type => ID)
+  ID: number;
 
-    @Field()
-    Names: string;
+  @Field()
+  Names: string;
 
-    @Field()
-    LastNames: string;
+  @Field()
+  LastNames: string;
 
-    @Field()
-    PhotoId: number;
+  @Field()
+  PhotoId: string;
 
-    @Field()
-    EMail: string;
+  @Field()
+  EMail: string;
 
-    @Field()
-    Status: number;
+  @Field()
+  Status: number;
 
-    @Field()
-    PhoneNumber: string;
+  @Field()
+  PhoneNumber: string;
+
+  @Field()
+  SSO_UserId: string;
 }
 
+@ObjectType()
+export class UserId{
+  @Field(type => ID)
+  ID: number;
+}
 
 @ObjectType()
 export class SavedElement{
-    @Field(type => ID)
-    ID: string;
 
-    @Field()
-    IDUser: number;
+  @Field()
+  IDUser: number;
 
-    @Field()
-    IDElement: number;
+  @Field()
+  IDElement: number;
 
 }
 

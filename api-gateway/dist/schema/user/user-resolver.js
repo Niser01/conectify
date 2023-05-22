@@ -12,11 +12,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
-import { User, SavedElement } from "./user-type.js";
+import { User, UserId, SavedElement } from "./user-type.js";
 const URL = process.env.USERS_URL || "http://localhost:8080";
 const URLMessages = process.env.MESSAGES_URL || "http://localhost/api/messages";
 let UserResolver = class UserResolver {
-    async userCreate(Names, LastNames, PhotoId, EMail, Status, PhoneNumber) {
+    async Create_User(Names, LastNames, PhotoId, EMail, Status, PhoneNumber, SSO_UserId) {
         let message = await axios.post(URL + "/users/create", {
             Names: Names,
             LastNames: LastNames,
@@ -24,6 +24,7 @@ let UserResolver = class UserResolver {
             EMail: EMail,
             Status: Status,
             PhoneNumber: PhoneNumber,
+            SSO_UserId: SSO_UserId,
         })
             .then(function (response) {
             if (response.status === 404) {
@@ -36,7 +37,7 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async userById(id) {
+    async Read_userByid(id) {
         let message = await axios.get(URL + "/users/id_read/" + id)
             .then(function (response) {
             if (response.status === 404) {
@@ -49,7 +50,7 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async userByEmail(email) {
+    async Read_userByemail(email) {
         let message = await axios.get(URL + "/users/email_read/" + email)
             .then(function (response) {
             if (response.status === 404) {
@@ -62,7 +63,21 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async userByNames(names) {
+    async Read_idByemail(email) {
+        let message = await axios.get(URL + "/users/id_by_email/" + email)
+            .then(function (response) {
+            if (response.status === 404) {
+                throw new Error("Id not found");
+            }
+            return response.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+        console.log(message);
+        return message;
+    }
+    async Read_userByname(names) {
         let message = await axios.get(URL + "/users/name_read/" + names)
             .then(function (response) {
             if (response.status === 404) {
@@ -75,7 +90,7 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async userByLastName(lastNames) {
+    async Read_userBylastname(lastNames) {
         let message = await axios.get(URL + "/users/lastname_read/" + lastNames)
             .then(function (response) {
             if (response.status === 404) {
@@ -88,7 +103,7 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async userByPhone(phone) {
+    async Read_userBypnumber(phone) {
         let message = await axios.get(URL + "/users/phone_read/" + phone)
             .then(function (response) {
             if (response.status === 404) {
@@ -101,7 +116,36 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async userUpdate(Id, Names, LastNames, PhotoId, EMail, Status, PhoneNumber) {
+    async Read_idBySSOId(SSO_UserId) {
+        let message = await axios.get(URL + "/users/id_by_sso/" + SSO_UserId)
+            .then(function (response) {
+            if (response.status === 404) {
+                throw new Error("Id not found");
+            }
+            return response.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+        return message;
+    }
+    async Update_photoId(Id, PhotoId) {
+        let message = await axios.put(URL + "/users/update_photo", {
+            Id: Id,
+            PhotoId: PhotoId
+        })
+            .then(function (response) {
+            if (response.status === 404) {
+                throw new Error("Photo not updated");
+            }
+            return response.data;
+        })
+            .catch(function (error) {
+            console.log(error);
+        });
+        return message;
+    }
+    async Update_userByid(Names, LastNames, PhotoId, EMail, Status, PhoneNumber, SSO_UserId, Id) {
         let message = await axios.put(URL + "/users/update", {
             Names: Names,
             LastNames: LastNames,
@@ -109,6 +153,8 @@ let UserResolver = class UserResolver {
             EMail: EMail,
             Status: Status,
             PhoneNumber: PhoneNumber,
+            SSO_UserId: SSO_UserId,
+            Id: Id,
         })
             .then(function (response) {
             if (response.status === 404) {
@@ -121,8 +167,12 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async userDelete(id) {
-        let message = await axios.delete(URL + "/users/delete/" + id)
+    async Delete_userByid(Id) {
+        let message = await axios.delete(URL + "/users/delete", {
+            data: {
+                Id: Id
+            }
+        })
             .then(function (response) {
             if (response.status === 404) {
                 throw new Error("User not deleted");
@@ -134,14 +184,14 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async userEditStatus(Id, Status) {
+    async Edit_statusByid(Id, Status) {
         let message = await axios.put(URL + "/users/edit_status", {
             Id: Id,
             Status: Status,
         })
             .then(function (response) {
             if (response.status === 404) {
-                throw new Error("User not updated");
+                throw new Error("Status not updated");
             }
             return response.data;
         })
@@ -150,7 +200,7 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async createSavedElement(IdUser, IdElement) {
+    async Create_savedElement(IdUser, IdElement) {
         let messages = await axios.get(URLMessages)
             .then(function (response) {
             return response.data;
@@ -167,7 +217,7 @@ let UserResolver = class UserResolver {
         })
             .then(function (response) {
             if (response.status === 404) {
-                throw new Error("User not created");
+                throw new Error("Saved element not created");
             }
             return response.data;
         })
@@ -176,20 +226,25 @@ let UserResolver = class UserResolver {
         });
         return message;
     }
-    async getSavedElementByIdUser(idUser) {
+    async Read_savedElements(idUser) {
         let message = await axios.get(URL + "/savedElement/id_read/" + idUser)
             .then(function (response) {
             if (response.status === 404) {
-                throw new Error("SavedElement not found");
+                throw new Error("Saved Element not found");
             }
             return response.data;
         })
             .catch(function (error) {
             console.log(error);
         });
+        return message;
     }
-    async deleteSavedElement(idElement) {
-        let message = await axios.delete(URL + "/savedElement/delete/" + idElement)
+    async Delete_savedElement(IdElement) {
+        let message = await axios.delete(URL + "/savedElement/delete", {
+            data: {
+                IdElement: IdElement
+            }
+        })
             .then(function (response) {
             if (response.status === 404) {
                 throw new Error("SavedElement not deleted");
@@ -199,9 +254,14 @@ let UserResolver = class UserResolver {
             .catch(function (error) {
             console.log(error);
         });
+        return message;
     }
-    async deleteAllSavedElement(idUser) {
-        let message = await axios.delete(URL + "/savedElement/delete_all/" + idUser)
+    async Delete_allsavedElements(IdUser) {
+        let message = await axios.delete(URL + "/savedElement/delete_all", {
+            data: {
+                IdUser: IdUser
+            }
+        })
             .then(function (response) {
             if (response.status === 404) {
                 throw new Error("SavedElement not deleted");
@@ -211,6 +271,7 @@ let UserResolver = class UserResolver {
             .catch(function (error) {
             console.log(error);
         });
+        return message;
     }
     transformToGraphql(message) {
         if (Array.isArray(message.reactions)) {
@@ -231,65 +292,89 @@ __decorate([
     __param(3, Arg("EMail")),
     __param(4, Arg("Status")),
     __param(5, Arg("PhoneNumber")),
+    __param(6, Arg("SSO_UserId")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, Number, String, Number, String]),
+    __metadata("design:paramtypes", [String, String, String, String, Number, String, String]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userCreate", null);
+], UserResolver.prototype, "Create_User", null);
 __decorate([
     Query(returns => User),
     __param(0, Arg("id")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userById", null);
+], UserResolver.prototype, "Read_userByid", null);
 __decorate([
     Query(returns => User),
     __param(0, Arg("eMail")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userByEmail", null);
+], UserResolver.prototype, "Read_userByemail", null);
+__decorate([
+    Query(returns => [UserId]),
+    __param(0, Arg("eMail")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "Read_idByemail", null);
 __decorate([
     Query(returns => [User]),
     __param(0, Arg("names")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userByNames", null);
+], UserResolver.prototype, "Read_userByname", null);
 __decorate([
     Query(returns => [User]),
     __param(0, Arg("lastNames")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userByLastName", null);
+], UserResolver.prototype, "Read_userBylastname", null);
 __decorate([
     Query(returns => [User]),
     __param(0, Arg("phoneNumber")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userByPhone", null);
+], UserResolver.prototype, "Read_userBypnumber", null);
 __decorate([
-    Mutation(returns => String, { nullable: true }),
-    __param(0, Arg("Id")),
-    __param(1, Arg("Names")),
-    __param(2, Arg("LastNames")),
-    __param(3, Arg("PhotoId")),
-    __param(4, Arg("EMail")),
-    __param(5, Arg("Status")),
-    __param(6, Arg("PhoneNumber")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, String, String, Number, String, Number, String]),
-    __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userUpdate", null);
-__decorate([
-    Mutation(returns => String, { nullable: true }),
-    __param(0, Arg("id")),
+    Query(returns => [UserId]),
+    __param(0, Arg("SSO_UserId")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userDelete", null);
+], UserResolver.prototype, "Read_idBySSOId", null);
+__decorate([
+    Mutation(returns => String, { nullable: true }),
+    __param(0, Arg("Id")),
+    __param(1, Arg("PhotoId")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number, String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "Update_photoId", null);
+__decorate([
+    Mutation(returns => String, { nullable: true }),
+    __param(0, Arg("Names")),
+    __param(1, Arg("LastNames")),
+    __param(2, Arg("PhotoId")),
+    __param(3, Arg("EMail")),
+    __param(4, Arg("Status")),
+    __param(5, Arg("PhoneNumber")),
+    __param(6, Arg("SSO_UserId")),
+    __param(7, Arg("Id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String, String, String, Number, String, String, Number]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "Update_userByid", null);
+__decorate([
+    Mutation(returns => String, { nullable: true }),
+    __param(0, Arg("Id")),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "Delete_userByid", null);
 __decorate([
     Mutation(returns => String, { nullable: true }),
     __param(0, Arg("Id")),
@@ -297,7 +382,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "userEditStatus", null);
+], UserResolver.prototype, "Edit_statusByid", null);
 __decorate([
     Mutation(returns => String, { nullable: true }),
     __param(0, Arg("IdUser")),
@@ -305,28 +390,28 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number, Number]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "createSavedElement", null);
+], UserResolver.prototype, "Create_savedElement", null);
 __decorate([
     Query(returns => [SavedElement]),
     __param(0, Arg("idUser")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getSavedElementByIdUser", null);
+], UserResolver.prototype, "Read_savedElements", null);
 __decorate([
     Mutation(returns => String, { nullable: true }),
-    __param(0, Arg("idElement")),
+    __param(0, Arg("IdElement")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "deleteSavedElement", null);
+], UserResolver.prototype, "Delete_savedElement", null);
 __decorate([
     Mutation(returns => String, { nullable: true }),
-    __param(0, Arg("idUser")),
+    __param(0, Arg("IdUser")),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "deleteAllSavedElement", null);
+], UserResolver.prototype, "Delete_allsavedElements", null);
 UserResolver = __decorate([
     Resolver(User)
 ], UserResolver);

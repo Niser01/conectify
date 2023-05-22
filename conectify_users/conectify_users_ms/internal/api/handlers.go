@@ -222,8 +222,8 @@ func (a *API) Create_savedElement(c echo.Context) error {
 }
 
 func (a *API) Read_savedElements(c echo.Context) error {
-	idElement := c.Param("idElement")
-	idnum, err := strconv.Atoi(idElement)
+	idUser := c.Param("idUser")
+	idnum, err := strconv.Atoi(idUser)
 	if err != nil {
 		return c.JSON(http.StatusBadRequest, err)
 	}

@@ -9,11 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import "reflect-metadata";
 import { Field, ObjectType, ID } from "type-graphql";
+//Created the object types of the user_models
 let User = class User {
 };
 __decorate([
     Field(type => ID),
-    __metadata("design:type", String)
+    __metadata("design:type", Number)
 ], User.prototype, "ID", void 0);
 __decorate([
     Field(),
@@ -25,7 +26,7 @@ __decorate([
 ], User.prototype, "LastNames", void 0);
 __decorate([
     Field(),
-    __metadata("design:type", Number)
+    __metadata("design:type", String)
 ], User.prototype, "PhotoId", void 0);
 __decorate([
     Field(),
@@ -39,16 +40,26 @@ __decorate([
     Field(),
     __metadata("design:type", String)
 ], User.prototype, "PhoneNumber", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", String)
+], User.prototype, "SSO_UserId", void 0);
 User = __decorate([
     ObjectType()
 ], User);
 export { User };
-let SavedElement = class SavedElement {
+let UserId = class UserId {
 };
 __decorate([
     Field(type => ID),
-    __metadata("design:type", String)
-], SavedElement.prototype, "ID", void 0);
+    __metadata("design:type", Number)
+], UserId.prototype, "ID", void 0);
+UserId = __decorate([
+    ObjectType()
+], UserId);
+export { UserId };
+let SavedElement = class SavedElement {
+};
 __decorate([
     Field(),
     __metadata("design:type", Number)
