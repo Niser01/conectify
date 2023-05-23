@@ -3,12 +3,14 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image } from 'react
 import { Channel, User, addUserToChannel, getUserDisplayById, listChannels, removeUserFromChannel } from '../utils/api';
 import { styles } from "../utils/styles";
 
+
 export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {navigation: any, route: any}) => {
     const { userId } = route.params;
     const [channels, setChannels] = useState<Channel[]>([]);
     const [joining, setJoining] = useState('');
     const [leaving, setLeaving] = useState('');
     const [currentUser, setCurrentUser] = useState<User>();
+
 
     // fetch channels from api and user info
     useEffect(() => {
@@ -95,6 +97,9 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
                 <Text style={styles.channelName}>{item.name}</Text>  
                 <Text style={styles.channelDescription}>{item.description}</Text>
             </TouchableOpacity>
+            
+            
+            {/*
             <View style={styles.channelActions}>
                 {
                     item.id === joining ? (
@@ -115,6 +120,8 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
                     )
                 }
             </View>
+            */}
+            
         </View>
     );
 
@@ -129,12 +136,37 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
                     <Text style={styles.buttonText}>Logout</Text>
                 </TouchableOpacity>
             </View>
+            <Text style={styles.channelsTitle}>Channels</Text>
             <FlatList
             data={channels}
             renderItem={renderChannelItem}
             keyExtractor={(item) => item.id}
-            contentContainerStyle={styles.channelList}
+
             />
+
+            <View style={styles.footer}>
+                <View style={styles.footerSub}>    
+                    <TouchableOpacity style={styles.footerSubImgText}>
+                        <Image style={styles.footerImg} source={require('../assets/hogar.png')} />
+                        <Text style={styles.footerText}>inicio</Text>
+                    </TouchableOpacity>        
+                    <TouchableOpacity style={styles.footerSubImgText}>
+                        <Image style={styles.footerImg} source={require('../assets/charla.png')} />
+                        <Text style={styles.footerText}>mensajes</Text>
+                    </TouchableOpacity> 
+                    <TouchableOpacity style={styles.footerSubImgText}>
+                        <Image style={styles.footerImg} source={require('../assets/usuarios.png')} />
+                        <Text style={styles.footerText}>canales</Text>
+                    </TouchableOpacity> 
+                    <TouchableOpacity style={styles.footerSubImgText}>
+                        <Image style={styles.footerImg} source={require('../assets/feliz.png')} />
+                        <Text style={styles.footerText}>tú</Text>
+                    </TouchableOpacity>         
+                </View>
+
+            </View>
+
+
         </View>
     );
 };

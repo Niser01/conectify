@@ -61,22 +61,24 @@ export const styles = StyleSheet.create({
         width: 50,
         height: 50,
     },
-    channelList: {
-        padding: 16,
-    },
+
     channelItem: {
         flexDirection: 'row',
         alignItems: 'flex-start',
         alignContent: 'space-between',
-        marginBottom: 16,
+        padding:"4.5%",
+        borderBottomWidth: 1,
+        borderBottomColor: '#353535',
+
     },
     channelInfoContainer: {
         flex: 1,
-        marginLeft: 4,
+
     },
     channelName: {
         fontSize: 20,
         fontWeight: 'bold',
+        color:"#fff"
     },
     channelDescription: {
         flexWrap: 'wrap',
@@ -173,4 +175,35 @@ export const styles = StyleSheet.create({
         justifyContent: 'center',
         resizeMode: 'cover',
       },
+
+    channelsTitle:{
+        fontSize: 20,
+        fontWeight: 'bold',
+        color:"#fff",
+        padding:"4.5%",
+        borderBottomWidth: 1.5,
+        borderBottomColor: '#DDDDDD',
+    },
+
+    footer: {
+        backgroundColor: '#EEEEEE',
+        height:"9%"
+    },
+    footerSub: {
+        paddingTop:"3%",
+        flexDirection: 'row',
+        alignContent:"space-around"
+    },
+    footerImg:{
+        width: 40,
+        height: 40,
+    },
+    footerSubImgText:{
+        flexDirection: 'column',
+        alignItems: 'center', 
+    },
+    footerText:{
+        color:"#000"
+    }
+
 });
