@@ -291,6 +291,32 @@ export async function getUserById(userId: string): Promise<User> {
     return response;
 }
 
+export async function Edit_statusByid(Id: number,Status: number) {
+    const userQuery={
+        "query": `mutation Mutation($status: Float!, $id: Float!) {
+            Edit_statusByid(Status: $status, Id: $id)
+          }`,
+          "variables": {
+            "status": Status,
+            "id": Id
+          }
+    };
+    const response = await axios({
+        url: AG_URL,
+        method: 'post',
+        headers: headers,
+        data: userQuery
+    }) .then((response) => {
+        return response.data.data.Edit_statusByid;
+    }).catch((error) => {
+        console.log(error);
+        throw "Status not updated";
+    });
+    return response;
+}
+
+
+
 export async function getUserDisplayById(userId: string): Promise<User> {
     const userQuery = {
         "query": `query Read_userByid($readUserByidId: String!) {

@@ -88,6 +88,14 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
         setJoining('');
     };
 
+    const handleNavigateToProfile = async () => {
+        navigation.navigate('Profile', { userId: userId });
+    };
+    const handleNavigateToChannel = async () => {
+        navigation.navigate('Channels', { userId: userId });
+    };
+
+
     const renderChannelItem = ({ item }: {item: Channel}) => (
         <View style={styles.channelItem}>
             <TouchableOpacity 
@@ -146,7 +154,8 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
 
             <View style={styles.footer}>
                 <View style={styles.footerSub}>    
-                    <TouchableOpacity style={styles.footerSubImgText}>
+                {/*
+                    <TouchableOpacity style={styles.footerSubImgText} onPress={()=> handleNavigateToChannels}>
                         <Image style={styles.footerImg} source={require('../assets/hogar.png')} />
                         <Text style={styles.footerText}>inicio</Text>
                     </TouchableOpacity>        
@@ -154,11 +163,13 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
                         <Image style={styles.footerImg} source={require('../assets/charla.png')} />
                         <Text style={styles.footerText}>mensajes</Text>
                     </TouchableOpacity> 
-                    <TouchableOpacity style={styles.footerSubImgText}>
+                */}
+
+                    <TouchableOpacity style={styles.footerSubImgText} onPress={handleNavigateToChannel}>
                         <Image style={styles.footerImg} source={require('../assets/usuarios.png')} />
                         <Text style={styles.footerText}>canales</Text>
                     </TouchableOpacity> 
-                    <TouchableOpacity style={styles.footerSubImgText}>
+                    <TouchableOpacity style={styles.footerSubImgText} onPress={handleNavigateToProfile}>
                         <Image style={styles.footerImg} source={require('../assets/feliz.png')} />
                         <Text style={styles.footerText}>tú</Text>
                     </TouchableOpacity>         

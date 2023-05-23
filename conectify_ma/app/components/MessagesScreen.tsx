@@ -174,7 +174,7 @@ export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: an
                 <Image
                     style={styles.tinyLogo}
                     source={{
-                    uri: 'https://reactnative.dev/img/tiny_logo.png',
+                    uri: 'https://ca.slack-edge.com/T0266FRGM-UQ46QH94Z-gc24d346e359-512',
                     }}
                 />
                 <View style={styles.messageBubble}>

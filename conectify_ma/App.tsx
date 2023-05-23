@@ -12,6 +12,8 @@ import React from 'react';
 import { MessagesScreen } from './app/components/MessagesScreen';
 import { ChannelsScreen } from './app/components/ChannelsScreen';
 import { LoginScreen } from './app/components/LoginScreen';
+import {ProfileScreen} from './app/components/ProfileScreen';
+import {ProfileEdit}    from './app/components/ProfileEdit';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +34,16 @@ function App(): JSX.Element {
                 <Stack.Screen
                     name="Messages"
                     component={MessagesScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Profile"
+                    component={ProfileScreen}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="ProfileEdit"
+                    component={ProfileEdit}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

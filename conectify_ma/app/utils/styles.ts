@@ -187,12 +187,19 @@ export const styles = StyleSheet.create({
 
     footer: {
         backgroundColor: '#EEEEEE',
-        height:"9%"
+        height:"9%",
+        bottom: 0,
+        position :"absolute",
+        width:"100%"
+        
     },
     footerSub: {
-        paddingTop:"3%",
         flexDirection: 'row',
-        alignContent:"space-around"
+        paddingTop:"3%",
+        paddingLeft:"3%",
+        paddingRight:"3%",
+        justifyContent: 'space-around',
+
     },
     footerImg:{
         width: 40,
@@ -204,6 +211,91 @@ export const styles = StyleSheet.create({
     },
     footerText:{
         color:"#000"
+    },
+    profileHeaderPicture:{
+        width:180,
+        height:35,
+    },
+    profileContainer:{
+        width: "100%",
+        height: "20%",
+        alignItems: 'center', 
+        paddingTop:"5%",
+
+    },
+    profilePhotoContainer:{
+        width: "80%",
+        height: "100%",
+        alignItems: 'center', 
+        borderBottomWidth: 1,
+        borderBottomColor: '#353535',
+    },
+    profilePhoto:{
+        width: "45%",
+        height: "95%",
+        borderRadius: 150,
+    },
+    profileTextContainer:{
+        width: "100%",
+        height: "20%",
+        paddingTop:"5%",
+    },
+    profileTextTitleContainer:{
+        width: "80%",
+        color:"#fff",
+        fontSize: 30,
+        fontWeight: 'bold',
+        paddingBottom:"5%"
+    },
+    profileTextRegularContainer:{
+        width: "80%",
+        color:"#fff",
+        fontSize: 20,
+        paddingBottom:"4%",
+        flexDirection:"row",
+        justifyContent:'space-evenly' 
+    },
+
+
+
+    profileInfoIcon:{
+        height:30,
+        width:30,
+    },
+
+    profileBotones:{
+        paddingTop:"10%",
+    },
+    profiletextBotones:{
+        backgroundColor:"#FC6161",
+        color:"#fff",
+        fontSize: 20,
+        padding:"4%",
+        borderRadius: 5,
+        flexDirection:"row",
+        justifyContent:'space-evenly'
+    },
+    profiletextBotonesEdit:{
+        color:"#fff",
+        fontSize: 20,
+        padding:"4%",
+        borderRadius: 5,
+        flexDirection:"row",
+        alignItems:"center",
+    },
+    profileTextRegularContainerEdit:{
+        width: "80%",
+        color:"#fff",
+        fontSize: 20,
+        paddingBottom:"5%",
+        paddingTop:"5%",
+        flexDirection:"row",
+        alignItems:"center",
+        justifyContent:'space-evenly',
+        borderWidth: 1,
+        borderColor:"#353535",
+
     }
+
 
 });
