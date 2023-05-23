@@ -132,10 +132,10 @@ export const styles = StyleSheet.create({
         color: '#FFF',
     },
     loginButton: {
-        backgroundColor: '#007AFF',
+        backgroundColor: '#FC6161',
         borderRadius: 4,
-        paddingHorizontal: 16,
-        paddingVertical: 8,
+        paddingHorizontal: "8%",
+        paddingVertical: "2%",
     },
     loginButtonText: {
         color: '#FFF',
