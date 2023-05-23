@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#1B1835',
+        backgroundColor: '#212121',
     },
     messagesContainer: {
         flexGrow: 1,
@@ -129,7 +129,7 @@ export const styles = StyleSheet.create({
         borderRadius: 20,
         paddingHorizontal: 16,
         marginBottom: 16,
-        color: '#FFF',
+        color: '#212121',
     },
     loginButton: {
         backgroundColor: '#FC6161',
@@ -146,7 +146,8 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 16,
-        backgroundColor: '#1B1835',
+        paddingTop:"13%",
+        backgroundColor: '#FC6161',
         borderBottomWidth: 1,
         borderBottomColor: '#DDDDDD',
         justifyContent: 'space-between',

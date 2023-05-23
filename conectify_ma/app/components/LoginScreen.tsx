@@ -7,7 +7,7 @@ import { login } from "../utils/api";
 export const LoginScreen = ({navigation}: {navigation:any}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const image = { uri: '../assets/LoginBGw.png' };
+    const image = { uri: 'https://i.postimg.cc/NjmFZmvd/Adobe-Stock-354938670-3.png' };
    
   
     const handleLogin = async () => {

@@ -122,7 +122,7 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
         <View style={styles.container}>
             <View style={styles.header}>
                 <View style={styles.headerSub}>                    
-                    <Image style={styles.userPicture} source={{ uri: 'https://reactnative.dev/img/tiny_logo.png', }} />
+                    <Image style={styles.userPicture} source={{ uri: 'https://ca.slack-edge.com/T0266FRGM-UQ46QH94Z-gc24d346e359-512', }} />
                     <Text style={styles.userName}>{currentUser?.Names} {currentUser?.LastNames}</Text>
                 </View>
                 <TouchableOpacity style={styles.loginButton} onPress={() => goBack()}>
