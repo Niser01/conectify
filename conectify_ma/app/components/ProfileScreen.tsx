@@ -1,10 +1,10 @@
 import React, { useEffect,useState } from "react";
-import { View, TextInput, TouchableOpacity, Text, Image, ImageBackground } from "react-native";
+import { View,  TouchableOpacity, Text, Image,  } from "react-native";
 import { styles } from "../utils/styles";
-import { getUserById,  User , Edit_statusByid} from '../utils/api';
+import { getUserById,  User } from '../utils/api';
 
 
-export const ProfileScreen = ({navigation,navigation: { goBack }, route}: {navigation: any, route: any}) => {
+export const ProfileScreen = ({navigation, route}: {navigation: any, route: any}) => {
     const { userId } = route.params;
     const [currentUser, setCurrentUser] = useState<User>();
     var status;

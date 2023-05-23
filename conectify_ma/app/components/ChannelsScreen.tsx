@@ -136,15 +136,15 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <View style={styles.headerSub}>                    
+                <TouchableOpacity style={styles.headerSub}  onPress={handleNavigateToProfile}>                    
                     <Image style={styles.userPicture} source={{ uri: 'https://ca.slack-edge.com/T0266FRGM-UQ46QH94Z-gc24d346e359-512', }} />
                     <Text style={styles.userName}>{currentUser?.Names} {currentUser?.LastNames}</Text>
-                </View>
+                </TouchableOpacity>
                 <TouchableOpacity style={styles.loginButton} onPress={() => goBack()}>
-                    <Text style={styles.buttonText}>Logout</Text>
+                    <Text style={styles.buttonText}>Cerrar sesión</Text>
                 </TouchableOpacity>
             </View>
-            <Text style={styles.channelsTitle}>Channels</Text>
+            <Text style={styles.channelsTitle}>Canales</Text>
             <FlatList
             data={channels}
             renderItem={renderChannelItem}

@@ -94,14 +94,14 @@ export const ProfileEdit = ({navigation,navigation: { goBack }, route}: {navigat
                 </TouchableOpacity> 
             */}
 
-                    <TouchableOpacity style={styles.footerSubImgText} onPress={handleNavigateToChannel}>
-                        <Image style={styles.footerImg} source={require('../assets/usuarios.png')} />
-                        <Text style={styles.footerText}>canales</Text>
-                    </TouchableOpacity> 
-                    <TouchableOpacity style={styles.footerSubImgText} onPress={handleNavigateToProfile}>
-                        <Image style={styles.footerImg} source={require('../assets/feliz.png')} />
-                        <Text style={styles.footerText}>tú</Text>
-                    </TouchableOpacity>        
+                <TouchableOpacity style={styles.footerSubImgText} onPress={handleNavigateToChannel}>
+                    <Image style={styles.footerImg} source={require('../assets/usuarios.png')} />
+                    <Text style={styles.footerText}>canales</Text>
+                </TouchableOpacity> 
+                <TouchableOpacity style={styles.footerSubImgText} onPress={handleNavigateToProfile}>
+                    <Image style={styles.footerImg} source={require('../assets/feliz.png')} />
+                    <Text style={styles.footerText}>tú</Text>
+                </TouchableOpacity>       
             </View>
 
         </View>
