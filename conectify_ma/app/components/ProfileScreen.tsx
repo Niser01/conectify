@@ -48,6 +48,7 @@ export const ProfileScreen = ({navigation, route}: {navigation: any, route: any}
         
         <View style={styles.container}>
         <View style={styles.header}>
+           
             <View style={styles.headerSub}>                    
                 <Image style={styles.profileHeaderPicture} source={require('../assets/conectify-logo.png')} />
                
@@ -58,7 +59,10 @@ export const ProfileScreen = ({navigation, route}: {navigation: any, route: any}
 
         <View style={styles.profileContainer}>
             <View style={styles.profilePhotoContainer}>
-                <Image style={styles.profilePhoto} source={{ uri: 'https://ca.slack-edge.com/T0266FRGM-UQ46QH94Z-gc24d346e359-512', }} />
+                {/*<Image style={styles.profilePhoto} source={{ uri: 'https://ca.slack-edge.com/T0266FRGM-UQ46QH94Z-gc24d346e359-512', }} />*/}
+                <View style={[styles.profilePhoto, {backgroundColor: currentUser?.PhotoId}]}>
+                    <Text style={styles.profilePhotoCharacters}>{currentUser?.Names?.charAt(0)}{currentUser?.LastNames?.charAt(0)}</Text>
+                </View>
             </View>
         </View>
 

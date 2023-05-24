@@ -1,9 +1,10 @@
 
 import React from "react";
 import { useEffect, useState } from "react";
-import { View, Text, FlatList, KeyboardAvoidingView, TextInput, TouchableOpacity, Image } from "react-native";
+import { View, Text, FlatList, KeyboardAvoidingView, TextInput, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { Channel, Message, User, createMessage, getChannelById, getUserDisplayById, loadChannel, updateChannel } from "../utils/api";
 import { styles } from "../utils/styles";
+
 
 
 
@@ -171,12 +172,15 @@ export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: an
         }
         return (
             <View style={styles.messageContainer}>
-                <Image
+                {/* <Image
                     style={styles.tinyLogo}
                     source={{
-                    uri: 'https://ca.slack-edge.com/T0266FRGM-UQ46QH94Z-gc24d346e359-512',
+                    uri: 'https://reactnative.dev/img/tiny_logo.png',
                     }}
-                />
+                /> */}                
+                <View style={[styles.profileImage, {backgroundColor: user?.PhotoId}]}>
+                    <Text style={styles.profileImageCharacters}>{user?.Names?.charAt(0)}{user?.LastNames?.charAt(0)}</Text>
+                </View>
                 <View style={styles.messageBubble}>
                     <Text style={styles.messageHeader}> {user?.Names} {user?.LastNames}</Text>
                     <Text style={styles.messageSubHeader}> {(new Date(item.created_at)).toLocaleString("en-GB")}</Text>
@@ -193,7 +197,7 @@ export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: an
                 <View style={styles.headerSub}>
                     <Text style={styles.userName}>{currentChannel?.name}</Text>
                 </View>
-                <TouchableOpacity style={styles.loginButton} onPress={() => goBack()}>
+                <TouchableOpacity style={styles.backButton} onPress={() => goBack()}>
                     <Text style={styles.buttonText}>Back</Text>
                 </TouchableOpacity>
             </View>

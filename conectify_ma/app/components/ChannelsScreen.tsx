@@ -137,7 +137,9 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
         <View style={styles.container}>
             <View style={styles.header}>
                 <TouchableOpacity style={styles.headerSub}  onPress={handleNavigateToProfile}>                    
-                    <Image style={styles.userPicture} source={{ uri: 'https://ca.slack-edge.com/T0266FRGM-UQ46QH94Z-gc24d346e359-512', }} />
+                    <View style={[styles.profileImage, {backgroundColor: currentUser?.PhotoId}]}>
+                        <Text style={styles.profileImageCharacters}>{currentUser?.Names?.charAt(0)}{currentUser?.LastNames?.charAt(0)}</Text>
+                    </View>
                     <Text style={styles.userName}>{currentUser?.Names} {currentUser?.LastNames}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.loginButton} onPress={() => goBack()}>

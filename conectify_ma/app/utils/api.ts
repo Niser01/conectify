@@ -1,4 +1,5 @@
 import axios from "axios";
+import stringToColour from "./user-colors";
 
 const AG_URL = 'http://34.173.4.99:4000/';
 const headers = {
@@ -47,7 +48,7 @@ export type User = {
     LastNames?: string;
     EMail?: string;
     PhoneNumber?: string;
-    PhotoId?: number;
+    PhotoId?: string;
     Status?: number;
 };
 
@@ -284,6 +285,7 @@ export async function getUserById(userId: string): Promise<User> {
         headers: headers,
         data: userQuery
     }).then((response) => {
+        response.data.data.Read_userByid.PhotoId = stringToColour(response.data.data.Read_userByid.Names+response.data.data.Read_userByid.LastNames);
         return response.data.data.Read_userByid;
     }).catch((error) => {
         console.log(error);
@@ -337,6 +339,7 @@ export async function getUserDisplayById(userId: string): Promise<User> {
         headers: headers,
         data: userQuery
     }).then((response) => {
+        response.data.data.Read_userByid.PhotoId = stringToColour(response.data.data.Read_userByid.Names+response.data.data.Read_userByid.LastNames);
         return response.data.data.Read_userByid;
     }).catch((error) => {
         console.log(error);
@@ -372,3 +375,4 @@ export async function login(email: string, password: string): Promise<{token: st
     });
     return response;
 }
+

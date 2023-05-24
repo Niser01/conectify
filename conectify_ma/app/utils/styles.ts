@@ -9,18 +9,22 @@ export const styles = StyleSheet.create({
         padding: 16,
     },
     messageContainer: {
+        padding: 8,
         marginBottom: 8,
         flexDirection: 'row',
         alignSelf: 'flex-start',
+        width: '100%',
+        borderBottomWidth: 3,
+        borderBottomColor: '#1E293B',
     },
     messageBubble: {
-        backgroundColor: '#363636',
-        borderRadius: 16,
         padding: 8,
+        maxWidth: '80%',
     },
     messageHeader: {
         color: '#FFF',
         fontSize: 18,
+        fontWeight: 'bold',
     },
     messageSubHeader: {
         color: '#FFF',
@@ -34,14 +38,14 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         borderTopWidth: 1,
-        borderTopColor: '#555',
+        borderTopColor: '#1E293B',
         padding: 8,
-        backgroundColor: '#333',
+        backgroundColor: '#0F172A',
     },
     input: {
         flex: 1,
         height: 40,
-        backgroundColor: '#444',
+        backgroundColor: '#94A3B8',
         borderRadius: 20,
         paddingHorizontal: 16,
         marginRight: 8,
@@ -61,7 +65,25 @@ export const styles = StyleSheet.create({
         width: 50,
         height: 50,
     },
+    profileImage: {
+        width: 50,
+        height: 50,
+        borderRadius: 10,
+        marginRight: 10,
+        justifyContent: 'center', //Centered vertically        
+        alignItems: 'center', //Centered horizontally
+    },
+    profileImageCharacters: {
+        fontSize: 20,
+        color: "#fff",
+        marginRight: 10,
+        fontWeight: 'bold',
+        paddingLeft: 10,
+    },
 
+    channelList: {
+        padding: 16,
+    },
     channelItem: {
         flexDirection: 'row',
         alignItems: 'flex-start',
@@ -169,6 +191,15 @@ export const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
     },
+
+    backButton: {
+        borderColor:"#fff",
+        borderWidth: 1,
+        borderRadius: 4,
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+    },
+
     image: {
         flex: 1,
         alignItems: 'center',
@@ -234,6 +265,15 @@ export const styles = StyleSheet.create({
         width: "45%",
         height: "95%",
         borderRadius: 150,
+        justifyContent: 'center', //Centered vertically        
+        alignItems: 'center', //Centered horizontally
+    },
+    profilePhotoCharacters:{
+        fontSize: 50,
+        color: "#fff",
+        marginRight: 10,
+        fontWeight: 'bold',
+        paddingLeft: 10,
     },
     profileTextContainer:{
         width: "100%",
