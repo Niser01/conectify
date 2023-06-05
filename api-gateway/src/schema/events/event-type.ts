@@ -21,25 +21,3 @@ export class event {
     @Field()
     allDay: string;
 }
-
-@InputType()
-export class eventmessage {  
-    @Field()
-    userId: string;
-  
-    @Field({ nullable: true })
-    content?: string;
-  
-    @Field()
-    channelId: string;
-  
-    @Field({ nullable: true })
-    thread?: string;
-  
-    @Field({ nullable: true })
-    visible?: boolean;
-  
-    @Field(type => [String], { nullable: true })
-    filesId?: string[];
-
-}

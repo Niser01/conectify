@@ -1,7 +1,7 @@
 import { Resolver, Query, Arg, Mutation } from "type-graphql";
 import axios from "axios";
 import { parseString } from "xml2js";
-import {event, eventmessage} from "./event-type.js";
+import {event} from "./event-type.js";
 
 const URL = process.env.SOAP_URL || 'http://35.223.216.194:55690';
 const URLM = process.env.MESSAGES_URL || "http://localhost/api/messages";
@@ -33,22 +33,18 @@ export default class EventResolver {
             return;
           }
           eventos  = result.Envelope.Body[0].getEventsResponse[0].events[0].event;
-          console.log(eventos);
         });
       })
       .catch(function (error) {
         console.log(error);
       });
 
-      console.log(eventos);
+      console.log(JSON.stringify(eventos));
 
       var newMessageData ={
       userId: userId,
-      content: eventos,
-      channelId: channelId,
-      thread: null,
-      visible: true,
-      filesId: null};
+      content: JSON.stringify(eventos),
+      channelId: channelId};
       
       console.log(newMessageData);
 

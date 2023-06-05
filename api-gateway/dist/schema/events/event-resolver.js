@@ -35,20 +35,16 @@ let EventResolver = class EventResolver {
                     return;
                 }
                 eventos = result.Envelope.Body[0].getEventsResponse[0].events[0].event;
-                console.log(eventos);
             });
         })
             .catch(function (error) {
             console.log(error);
         });
-        console.log(eventos);
+        console.log(JSON.stringify(eventos));
         var newMessageData = {
             userId: userId,
-            content: eventos,
-            channelId: channelId,
-            thread: null,
-            visible: true,
-            filesId: null
+            content: JSON.stringify(eventos),
+            channelId: channelId
         };
         console.log(newMessageData);
         let response = await axios.post(URLM, newMessageData)
