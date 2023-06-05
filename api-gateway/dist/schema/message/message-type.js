@@ -9,6 +9,61 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import "reflect-metadata";
 import { Field, ObjectType, ID } from "type-graphql";
+import { File } from "../file/file-type.js";
+let PlainMessage = class PlainMessage {
+};
+__decorate([
+    Field(type => ID),
+    __metadata("design:type", String)
+], PlainMessage.prototype, "_id", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", String)
+], PlainMessage.prototype, "userId", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
+], PlainMessage.prototype, "content", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", Boolean)
+], PlainMessage.prototype, "edited", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", String)
+], PlainMessage.prototype, "channelId", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
+], PlainMessage.prototype, "thread", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", Boolean)
+], PlainMessage.prototype, "visible", void 0);
+__decorate([
+    Field(type => [String], { nullable: true }),
+    __metadata("design:type", Array)
+], PlainMessage.prototype, "replies", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
+], PlainMessage.prototype, "reactions", void 0);
+__decorate([
+    Field(type => [String], { nullable: true }),
+    __metadata("design:type", Array)
+], PlainMessage.prototype, "filesId", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", Date)
+], PlainMessage.prototype, "updated_at", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", Date)
+], PlainMessage.prototype, "created_at", void 0);
+PlainMessage = __decorate([
+    ObjectType()
+], PlainMessage);
+export { PlainMessage };
 let Message = class Message {
 };
 __decorate([
@@ -22,6 +77,10 @@ __decorate([
 __decorate([
     Field({ nullable: true }),
     __metadata("design:type", String)
+], Message.prototype, "userName", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
 ], Message.prototype, "content", void 0);
 __decorate([
     Field(),
@@ -31,6 +90,10 @@ __decorate([
     Field(),
     __metadata("design:type", String)
 ], Message.prototype, "channelId", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
+], Message.prototype, "channelName", void 0);
 __decorate([
     Field({ nullable: true }),
     __metadata("design:type", String)
@@ -48,9 +111,9 @@ __decorate([
     __metadata("design:type", String)
 ], Message.prototype, "reactions", void 0);
 __decorate([
-    Field(type => [String], { nullable: true }),
+    Field(type => [File], { nullable: true }),
     __metadata("design:type", Array)
-], Message.prototype, "filesId", void 0);
+], Message.prototype, "files", void 0);
 __decorate([
     Field(),
     __metadata("design:type", Date)
@@ -102,9 +165,9 @@ __decorate([
     __metadata("design:type", String)
 ], MessageAsThread.prototype, "reactions", void 0);
 __decorate([
-    Field(type => [String], { nullable: true }),
+    Field(type => [File], { nullable: true }),
     __metadata("design:type", Array)
-], MessageAsThread.prototype, "filesId", void 0);
+], MessageAsThread.prototype, "files", void 0);
 __decorate([
     Field(),
     __metadata("design:type", Date)

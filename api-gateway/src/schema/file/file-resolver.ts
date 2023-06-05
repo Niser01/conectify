@@ -10,6 +10,7 @@ import amqp from "amqplib/callback_api.js";
 
 
 const URL = process.env.FILES_URL || "http://localhost:8080";
+const mqURL = process.env.MQ_URL || 'amqp://localhost';
 
 @Resolver()
 export default class FileResolver {
@@ -84,7 +85,7 @@ export default class FileResolver {
       return "error";
     });
 
-    amqp.connect('amqp://localhost', function(error0, connection) {
+    amqp.connect(mqURL, function(error0, connection) {
       if (error0) {
         throw error0;
       }
@@ -108,14 +109,14 @@ export default class FileResolver {
           }
         };
 
-        channel.assertQueue(queue, {
-          durable: true
-        });
+        // channel.assertQueue(queue, {
+        //   durable: true
+        // });
 
         channel.assertExchange(exchange, 'fanout', {
           durable: true
         });
-        channel.bindQueue(queue, exchange, '');
+        // channel.bindQueue(queue, exchange, '');
         // channel.publish(exchange,'', Buffer.from(msg), options);
         channel.publish(exchange,'', fileContents, options);
         console.log(" [x] Sent %s", msg);   
@@ -205,14 +206,14 @@ export default class FileResolver {
             }
           };
 
-          channel.assertQueue(queue, {
-            durable: true
-          });
+          // channel.assertQueue(queue, {
+          //   durable: true
+          // });
 
           channel.assertExchange(exchange, 'fanout', {
             durable: true
           });
-          channel.bindQueue(queue, exchange, '');
+          // channel.bindQueue(queue, exchange, '');
           // channel.publish(exchange,'', Buffer.from(msg), options);
           channel.publish(exchange,'', fileContents, options);
           console.log(" [x] Sent %s", msg);   

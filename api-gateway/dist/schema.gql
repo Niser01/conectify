@@ -3,6 +3,16 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Channel {
+  admins: [Float!]
+  description: String!
+  files: [Float!]
+  id: String
+  members: [Float!]
+  messages: [Float!]
+  name: String!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
@@ -21,15 +31,17 @@ type File {
 type Message {
   _id: ID!
   channelId: String!
+  channelName: String
   content: String
   created_at: DateTime!
   edited: Boolean!
-  filesId: [String!]
+  files: [File!]
   reactions: String
   replies: [String!]
   thread: String
   updated_at: DateTime!
   userId: String!
+  userName: String
   visible: Boolean!
 }
 
@@ -39,7 +51,7 @@ type MessageAsThread {
   content: String
   created_at: DateTime!
   edited: Boolean!
-  filesId: [String!]
+  files: [File!]
   reactions: String
   replies: [Message!]
   thread: String
@@ -57,13 +69,20 @@ type Mutation {
   Edit_statusByid(Id: Float!, Status: Float!): String
   Update_photoId(Id: Float!, PhotoId: String!): String
   Update_userByid(EMail: String!, Id: Float!, LastNames: String!, Names: String!, PhoneNumber: String!, PhotoId: String!, SSO_UserId: String!, Status: Float!): String
+  addMemberToChannel(id: String!, member_id: Float!): String
+  createChannel(admins: String!, channelName: String!, description: String!, files: String!, members: Float!, messages: Float!): String
   createMessage(newMessageData: NewMessageInput!): String
+  createMessageAndUploadFile(file: Upload!, newMessageData: NewMessageInput!): String
+  deleteChannel(id: String!, user_id: Float!): String
   deleteFile(fileId: String!, userId: String!): String
   deleteFileFromMessage(fileId: String!, id: String!, userId: String!): String
   deleteMessage(id: String!, userId: String!): String
   editMessage(content: String!, id: String!, userId: String!): String
   reactToMessage(id: String!, reaction: String!, userId: String!): String
+  register(email: String!, password: String!): UserCredentials!
+  removeMemberFromChannel(id: String!, member_id: Float!): String
   toggleMessageVisibility(id: String!, userId: String!): String
+  updateChannel(admins: String!, channelName: String!, description: String!, files: String!, id: Float!, members: Float!, messages: Float!): String
   uploadFile(channelId: String!, file: Upload!, userId: String!): File!
   uploadFileURL(channelId: String!, fileId: String!, fileURL: String!, userId: String!): String!
   uploadFiles(channelId: String!, files: [Upload!]!, userId: String!): [File!]!
@@ -86,7 +105,23 @@ input NewMessageInput {
   visible: Boolean
 }
 
+type PlainMessage {
+  _id: ID!
+  channelId: String!
+  content: String
+  created_at: DateTime!
+  edited: Boolean!
+  filesId: [String!]
+  reactions: String
+  replies: [String!]
+  thread: String
+  updated_at: DateTime!
+  userId: String!
+  visible: Boolean!
+}
+
 type Query {
+  Get_events(user: String!): String
   Read_idBySSOId(SSO_UserId: String!): [UserId!]!
   Read_idByemail(eMail: String!): [UserId!]!
   Read_savedElements(idUser: Float!): [SavedElement!]!
@@ -95,17 +130,32 @@ type Query {
   Read_userBylastname(lastNames: String!): [User!]!
   Read_userByname(names: String!): [User!]!
   Read_userBypnumber(phoneNumber: String!): [User!]!
+  channeById(id: String!): Channel!
+  channelLastMessages(channelId: String!, limit: String): [Message!]!
+  channelUpdates(channelId: String!, lastUpdate: String!): [Message!]!
+  channels: [Channel!]!
   getFilesByIds(fileInput: NewFileInput!): [File!]!
   getFilesOfUser(fileInput: NewFileInput!): [File!]!
+  getMembers(channel_id: String!): [Float!]!
+  login(email: String!, password: String!): Token!
   message(id: String!): Message!
   messageAsThread(id: String!): MessageAsThread!
   messages: [Message!]!
+  plainMessage(id: String!): PlainMessage!
+  searchChannel(search: String!): [Channel!]!
   searchMessages(search: String!): [Message!]!
+  userRecentMessages(limit: String, userId: String!): [Message!]!
 }
 
 type SavedElement {
   IDElement: Float!
   IDUser: Float!
+}
+
+type Token {
+  exp: String!
+  id: String!
+  token: String!
 }
 
 """The `Upload` scalar type represents a file upload."""
@@ -120,6 +170,11 @@ type User {
   PhotoId: String!
   SSO_UserId: String!
   Status: Float!
+}
+
+type UserCredentials {
+  email: String!
+  id: String!
 }
 
 type UserId {

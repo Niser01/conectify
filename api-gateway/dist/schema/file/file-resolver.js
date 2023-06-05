@@ -18,6 +18,7 @@ import GraphQLUpload from "graphql-upload/GraphQLUpload.mjs";
 import FormData from "form-data";
 import amqp from "amqplib/callback_api.js";
 const URL = process.env.FILES_URL || "http://localhost:8080";
+const mqURL = process.env.MQ_URL || 'amqp://localhost';
 let FileResolver = class FileResolver {
     async getFilesByIds(fileInput) {
         if (fileInput.filesId == null) {
@@ -79,7 +80,7 @@ let FileResolver = class FileResolver {
             console.log(error);
             return "error";
         });
-        amqp.connect('amqp://localhost', function (error0, connection) {
+        amqp.connect(mqURL, function (error0, connection) {
             if (error0) {
                 throw error0;
             }
@@ -101,13 +102,13 @@ let FileResolver = class FileResolver {
                         "channelId": channelId
                     }
                 };
-                channel.assertQueue(queue, {
-                    durable: true
-                });
+                // channel.assertQueue(queue, {
+                //   durable: true
+                // });
                 channel.assertExchange(exchange, 'fanout', {
                     durable: true
                 });
-                channel.bindQueue(queue, exchange, '');
+                // channel.bindQueue(queue, exchange, '');
                 // channel.publish(exchange,'', Buffer.from(msg), options);
                 channel.publish(exchange, '', fileContents, options);
                 console.log(" [x] Sent %s", msg);
@@ -178,13 +179,13 @@ let FileResolver = class FileResolver {
                             "channelId": channelId
                         }
                     };
-                    channel.assertQueue(queue, {
-                        durable: true
-                    });
+                    // channel.assertQueue(queue, {
+                    //   durable: true
+                    // });
                     channel.assertExchange(exchange, 'fanout', {
                         durable: true
                     });
-                    channel.bindQueue(queue, exchange, '');
+                    // channel.bindQueue(queue, exchange, '');
                     // channel.publish(exchange,'', Buffer.from(msg), options);
                     channel.publish(exchange, '', fileContents, options);
                     console.log(" [x] Sent %s", msg);
