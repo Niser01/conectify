@@ -121,7 +121,7 @@ type PlainMessage {
 }
 
 type Query {
-  Get_events(user: String!): String
+  Get_events(channelId: String!, user: String!, userId: String!): String
   Read_idBySSOId(SSO_UserId: String!): [UserId!]!
   Read_idByemail(eMail: String!): [UserId!]!
   Read_savedElements(idUser: Float!): [SavedElement!]!

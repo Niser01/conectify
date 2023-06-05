@@ -1,8 +1,8 @@
 import "reflect-metadata";
-import { Field, ObjectType } from "type-graphql";
+import { Field, ObjectType,  InputType} from "type-graphql";
 
 @ObjectType()
-export default class event {
+export class event {
     @Field()
     title: string;
 
@@ -20,4 +20,17 @@ export default class event {
 
     @Field()
     allDay: string;
+}
+
+@InputType()
+export class eventmessage {  
+    @Field()
+    userId: string;
+  
+    @Field({ nullable: true })
+    content?: string;
+  
+    @Field()
+    channelId: string;
+
 }

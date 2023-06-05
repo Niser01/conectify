@@ -1,9 +1,9 @@
 {
-  "expoServerPort": 19000,
+  "expoServerPort": null,
   "packagerPort": 19000,
   "expoServerNgrokUrl": "https://j8-zr6.anonymous.conectify-ma.exp.direct",
   "packagerNgrokUrl": "https://j8-zr6.anonymous.conectify-ma.exp.direct",
-  "ngrokPid": 1780,
+  "ngrokPid": 4252,
   "packagerPid": null,
   "webpackServerPort": null
 }

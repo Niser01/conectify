@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import "reflect-metadata";
-import { Field, ObjectType } from "type-graphql";
+import { Field, ObjectType, InputType } from "type-graphql";
 let event = class event {
 };
 __decorate([
@@ -38,4 +38,22 @@ __decorate([
 event = __decorate([
     ObjectType()
 ], event);
-export default event;
+export { event };
+let eventmessage = class eventmessage {
+};
+__decorate([
+    Field(),
+    __metadata("design:type", String)
+], eventmessage.prototype, "userId", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
+], eventmessage.prototype, "content", void 0);
+__decorate([
+    Field(),
+    __metadata("design:type", String)
+], eventmessage.prototype, "channelId", void 0);
+eventmessage = __decorate([
+    InputType()
+], eventmessage);
+export { eventmessage };

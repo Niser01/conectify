@@ -13,11 +13,11 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 import { Resolver, Query, Arg } from "type-graphql";
 import axios from "axios";
 import { parseString } from "xml2js";
-import event from "./event-type.js";
+import { event } from "./event-type.js";
 const URL = process.env.SOAP_URL || 'http://35.223.216.194:55690';
 const URLM = process.env.MESSAGES_URL || "http://localhost/api/messages";
 let EventResolver = class EventResolver {
-    async Get_events(user) {
+    async Get_events(user, userId, channelId) {
         const xmlBody = `
     <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
         <soap:Body>
@@ -35,12 +35,20 @@ let EventResolver = class EventResolver {
                     return;
                 }
                 eventos = result.Envelope.Body[0].getEventsResponse[0].events[0].event;
+                console.log(eventos);
             });
         })
             .catch(function (error) {
             console.log(error);
         });
-        let response = await axios.post(URLM, eventos)
+        console.log(eventos);
+        var newMessageData = {
+            userId: userId,
+            content: eventos,
+            channelId: channelId
+        };
+        console.log(newMessageData);
+        let response = await axios.post(URLM, newMessageData)
             .then(function (response) {
             console.log(eventos);
             return "ok";
@@ -55,8 +63,10 @@ let EventResolver = class EventResolver {
 __decorate([
     Query(returns => String, { nullable: true }),
     __param(0, Arg("user")),
+    __param(1, Arg("userId")),
+    __param(2, Arg("channelId")),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [String, String, String]),
     __metadata("design:returntype", Promise)
 ], EventResolver.prototype, "Get_events", null);
 EventResolver = __decorate([
