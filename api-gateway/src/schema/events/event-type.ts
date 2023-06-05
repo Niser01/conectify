@@ -32,5 +32,14 @@ export class eventmessage {
   
     @Field()
     channelId: string;
+  
+    @Field({ nullable: true })
+    thread?: string;
+  
+    @Field({ nullable: true })
+    visible?: boolean;
+  
+    @Field(type => [String], { nullable: true })
+    filesId?: string[];
 
 }

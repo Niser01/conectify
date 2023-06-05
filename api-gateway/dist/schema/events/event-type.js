@@ -53,6 +53,18 @@ __decorate([
     Field(),
     __metadata("design:type", String)
 ], eventmessage.prototype, "channelId", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", String)
+], eventmessage.prototype, "thread", void 0);
+__decorate([
+    Field({ nullable: true }),
+    __metadata("design:type", Boolean)
+], eventmessage.prototype, "visible", void 0);
+__decorate([
+    Field(type => [String], { nullable: true }),
+    __metadata("design:type", Array)
+], eventmessage.prototype, "filesId", void 0);
 eventmessage = __decorate([
     InputType()
 ], eventmessage);

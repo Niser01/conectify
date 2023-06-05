@@ -45,8 +45,11 @@ export default class EventResolver {
       var newMessageData ={
       userId: userId,
       content: eventos,
-      channelId: channelId};
-
+      channelId: channelId,
+      thread: null,
+      visible: true,
+      filesId: null};
+      
       console.log(newMessageData);
 
       let response = await axios.post(URLM, newMessageData)
