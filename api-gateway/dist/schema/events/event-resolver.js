@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
-import { Resolver, Query, Arg } from "type-graphql";
+import { Resolver, Query, Arg, Authorized } from "type-graphql";
 import axios from "axios";
 import { parseString } from "xml2js";
 import { event } from "./event-type.js";
@@ -40,7 +40,6 @@ let EventResolver = class EventResolver {
             .catch(function (error) {
             console.log(error);
         });
-        console.log(JSON.stringify(eventos));
         var newMessageData = {
             userId: userId,
             content: JSON.stringify(eventos),
@@ -60,6 +59,7 @@ let EventResolver = class EventResolver {
     }
 };
 __decorate([
+    Authorized(),
     Query(returns => String, { nullable: true }),
     __param(0, Arg("user")),
     __param(1, Arg("userId")),

@@ -19,7 +19,8 @@ export const LoginScreen = ({navigation}: {navigation:any}) => {
         }
         await login(email.trim(), password.trim()).then((response) => {
             const user_id = parseInt(response.id);
-            navigation.navigate('Channels', { userId: user_id });
+            const token = response.token
+            navigation.navigate('Channels', { userId: user_id , token: token});
         }).catch((error) => 
             console.log(error)
         );

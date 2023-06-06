@@ -2,10 +2,7 @@ import axios from "axios";
 import stringToColour from "./user-colors";
 
 const AG_URL = 'http://34.173.4.99:4000/';
-const headers = {
-  "content-type": "application/json",
-  "apollo-require-preflight": "true"
-};
+
 
 export type File = {
     id: string;
@@ -52,7 +49,7 @@ export type User = {
     Status?: number;
 };
 
-export async function createMessage(channelId: string, userId: string, message: string) {
+export async function createMessage(channelId: string, userId: string, message: string, token: string) {
     const createMessageMutation = {
         "query": `mutation createMessage($newMessageData: NewMessageInput!) {
             createMessage(newMessageData: $newMessageData)
@@ -68,14 +65,18 @@ export async function createMessage(channelId: string, userId: string, message: 
     await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: createMessageMutation
     }).catch((error) => {
         console.log(error);
     });
 }
 
-export async function loadChannel(channelId: string, limit: number = 50): Promise<Message[]> {
+export async function loadChannel(channelId: string, limit: number = 50, token: string): Promise<Message[]> {
     const lastMessagesQuery = {
         "query": `query ChannelLastMessages($channelId: String!, $limit: String) {
             channelLastMessages(channelId: $channelId, limit: $limit) {
@@ -109,7 +110,11 @@ export async function loadChannel(channelId: string, limit: number = 50): Promis
     const response = await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: lastMessagesQuery
     }).then((response) => {
         return response.data.data.channelLastMessages;
@@ -119,7 +124,7 @@ export async function loadChannel(channelId: string, limit: number = 50): Promis
     return response;
 }
 
-export async function updateChannel(channelId: string, lastUpdate: Date): Promise<Message[]> {
+export async function updateChannel(channelId: string, lastUpdate: Date,token: string): Promise<Message[]> {
     const channelUpdatesQuery = {
         "query": `query ChannelUpdates($lastUpdate: String!, $channelId: String!) {
         channelUpdates(lastUpdate: $lastUpdate, channelId: $channelId) {
@@ -153,7 +158,11 @@ export async function updateChannel(channelId: string, lastUpdate: Date): Promis
     const response = await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: channelUpdatesQuery
     }).then((response) => {
         return response.data.data.channelUpdates;
@@ -163,7 +172,7 @@ export async function updateChannel(channelId: string, lastUpdate: Date): Promis
     return response;
 }
 
-export async function listChannels(): Promise<Channel[]> {
+export async function listChannels(token: string): Promise<Channel[]> {
     const channelsQuery = {
         "query": `query Channels {
             channels {
@@ -181,7 +190,11 @@ export async function listChannels(): Promise<Channel[]> {
     const response = await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: channelsQuery
     }).then((response) => {
         return response.data.data.channels;
@@ -191,7 +204,7 @@ export async function listChannels(): Promise<Channel[]> {
     return response;
 }
 
-export async function getChannelById(channelId: string): Promise<Channel> {
+export async function getChannelById(channelId: string,token: string): Promise<Channel> {
     const channelQuery = {
         "query": `query ChanneById($channelId: String!) {
             channeById(id: $channelId) {
@@ -211,7 +224,11 @@ export async function getChannelById(channelId: string): Promise<Channel> {
     const response = await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: channelQuery
     }).then((response) => {
         return response.data.data.channeById;
@@ -222,7 +239,7 @@ export async function getChannelById(channelId: string): Promise<Channel> {
     return response;
 }
 
-export async function addUserToChannel(channelId: string, userId: number) {
+export async function addUserToChannel(channelId: string, userId: number,token: string) {
     const addUserToChannelMutation = {
         "query": `mutation AddMemberToChannel($memberId: Float!, $addMemberToChannelId: String!) {
             addMemberToChannel(member_id: $memberId, id: $addMemberToChannelId)
@@ -235,14 +252,18 @@ export async function addUserToChannel(channelId: string, userId: number) {
     await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: addUserToChannelMutation
     }).catch((error) => {
         console.log(error);
     });
 }
 
-export async function removeUserFromChannel(channelId: string, userId: number) {
+export async function removeUserFromChannel(channelId: string, userId: number,token: string) {
     const removeUserFromChannelMutation = {
         "query": `mutation RemoveMemberFromChannel($memberId: Float!, $removeMemberFromChannelId: String!) {
             removeMemberFromChannel(member_id: $memberId, id: $removeMemberFromChannelId)
@@ -255,14 +276,18 @@ export async function removeUserFromChannel(channelId: string, userId: number) {
     await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: removeUserFromChannelMutation
     }).catch((error) => {
         console.log(error);
     });
 }
 
-export async function getUserById(userId: string): Promise<User> {
+export async function getUserById(userId: string,token: string): Promise<User> {
     const userQuery = {
         "query": `query Read_userByid($readUserByidId: String!) {
             Read_userByid(id: $readUserByidId) {
@@ -282,7 +307,11 @@ export async function getUserById(userId: string): Promise<User> {
     const response = await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: userQuery
     }).then((response) => {
         response.data.data.Read_userByid.PhotoId = stringToColour(response.data.data.Read_userByid.Names+response.data.data.Read_userByid.LastNames);
@@ -293,7 +322,7 @@ export async function getUserById(userId: string): Promise<User> {
     return response;
 }
 
-export async function Edit_statusByid(Id: number,Status: number) {
+export async function Edit_statusByid(Id: number,Status: number ,token: string) {
     const userQuery={
         "query": `mutation Mutation($status: Float!, $id: Float!) {
             Edit_statusByid(Status: $status, Id: $id)
@@ -306,7 +335,11 @@ export async function Edit_statusByid(Id: number,Status: number) {
     const response = await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: userQuery
     }) .then((response) => {
         return response.data.data.Edit_statusByid;
@@ -319,7 +352,7 @@ export async function Edit_statusByid(Id: number,Status: number) {
 
 
 
-export async function getUserDisplayById(userId: string): Promise<User> {
+export async function getUserDisplayById(userId: string,token: string): Promise<User> {
     const userQuery = {
         "query": `query Read_userByid($readUserByidId: String!) {
             Read_userByid(id: $readUserByidId) {
@@ -336,7 +369,11 @@ export async function getUserDisplayById(userId: string): Promise<User> {
     const response = await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
         data: userQuery
     }).then((response) => {
         response.data.data.Read_userByid.PhotoId = stringToColour(response.data.data.Read_userByid.Names+response.data.data.Read_userByid.LastNames);
@@ -365,7 +402,10 @@ export async function login(email: string, password: string): Promise<{token: st
     const response = await axios({
         url: AG_URL,
         method: 'post',
-        headers: headers,
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true"
+          },
         data: loginQuery
     }).then((response) => {
         return { token: response.data.data.login.token, id: response.data.data.login.id };

@@ -1,4 +1,4 @@
-import { Resolver, Query, Arg, Mutation } from "type-graphql";
+import { Resolver, Query, Arg, Mutation, Authorized } from "type-graphql";
 import axios from "axios";
 import { parseString } from "xml2js";
 import {event} from "./event-type.js";
@@ -9,6 +9,7 @@ const URLM = process.env.MESSAGES_URL || "http://localhost/api/messages";
 @Resolver(event)
 export default class EventResolver {
 
+  @Authorized()
   @Query(returns => String, { nullable: true })
   async Get_events(
     @Arg("user") user: string,
@@ -38,8 +39,6 @@ export default class EventResolver {
       .catch(function (error) {
         console.log(error);
       });
-
-      console.log(JSON.stringify(eventos));
 
       var newMessageData ={
       userId: userId,

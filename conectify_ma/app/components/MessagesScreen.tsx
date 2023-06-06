@@ -10,7 +10,7 @@ import { styles } from "../utils/styles";
 
 export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: any, route: any}) => {
 
-    const { userId, channelId, channel } = route.params;
+    const { userId, channelId, channel, token } = route.params;
 
     const [message, setMessage] = useState('');
     const [messages, setMessages] = useState<Map<string, Message>>(new Map());
@@ -28,9 +28,9 @@ export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: an
             return;
         }
         setDisableSend(true);
-        await createMessage(channelId, userId, message).then(() => {
+        await createMessage(channelId, userId, message,token).then(() => {
             setMessage('');
-            updateChannel(channelId, lastUpdate).then((response) => {
+            updateChannel(channelId, lastUpdate,token).then((response) => {
                 if (response.length > 0) {
                     setNewMessages(response);
                 };
@@ -52,12 +52,12 @@ export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: an
             const messagesMap = new Map();
             let lastUpdateAt = new Date(0); 
             usersMap.set(userId, true);
-            await getChannelById(channelId).then((response) => {
+            await getChannelById(channelId,token).then((response) => {
                 setCurrentChannel(response);
             }).catch((error) =>
                 console.log(error)
             );
-            await loadChannel(channelId).then((response) => {
+            await loadChannel(channelId, undefined, token).then((response) => {
                 response.forEach((message: Message) => {
                     messagesMap.set(message._id, message);
                     if (new Date(message.updated_at) > lastUpdateAt) {
@@ -69,7 +69,7 @@ export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: an
                 console.log(error)
             );
             for (let userId of usersMap.keys()) {
-                await getUserDisplayById(userId).then((response) => {
+                await getUserDisplayById(userId,token).then((response) => {
                     usersMap.set(userId, response);
                 }).catch((error) =>
                     console.log(error)
@@ -92,7 +92,7 @@ export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: an
         let active = true;
         const interval = setInterval( () => {
             const asyncWrapper = async () => {
-                await updateChannel(channelId, lastUpdate).then((response) => {
+                await updateChannel(channelId, lastUpdate,token).then((response) => {
                     if (active && response.length > 0) {
                         setNewMessages(response);
                     };
@@ -116,7 +116,7 @@ export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: an
             const mergeUsers = (currentUsers: Map<string, User>, newMessages: Message[]) => {
                 let usersMap = new Map(currentUsers);
                 newMessages.forEach(async (message: Message) => {
-                    await getUserDisplayById(message.userId).then((response) => {
+                    await getUserDisplayById(message.userId,token).then((response) => {
                         usersMap.set(message.userId, response);
                     }).catch((error) =>
                         console.log(error)
@@ -148,7 +148,7 @@ export const MessagesScreen = ({navigation : { goBack }, route}: {navigation: an
             const asyncWrapper = async () => {
                 const usersMap = new Map(users);
                 for (let userId of users.keys()) {
-                    await getUserDisplayById(userId).then((response) => {
+                    await getUserDisplayById(userId,token).then((response) => {
                         usersMap.set(userId, response);
                     }).catch((error) => 
                         console.log(error)

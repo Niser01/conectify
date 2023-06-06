@@ -5,14 +5,14 @@ import {  User , Edit_statusByid} from '../utils/api';
 
 
 export const ProfileEdit = ({navigation,navigation: { goBack }, route}: {navigation: any, route: any}) => {
-    const { userId } = route.params;
+    const { userId, token } = route.params;
     
     
 
     const handleNewStatus = async (status: number) => {
         
             const asyncWrapper = async () => {
-                    await Edit_statusByid(userId, status)
+                    await Edit_statusByid(userId, status, token)
                     .then((response) => {
                        console.log(response)
                     }).catch((error) =>
@@ -28,10 +28,10 @@ export const ProfileEdit = ({navigation,navigation: { goBack }, route}: {navigat
 
 
     const handleNavigateToProfile = async () => {
-        navigation.navigate('Profile', { userId: userId });
+        navigation.navigate('Profile', { userId: userId , token: token});
     };
     const handleNavigateToChannel = async () => {
-        navigation.navigate('Channels', { userId: userId });
+        navigation.navigate('Channels', { userId: userId, token: token });
     };
 
 

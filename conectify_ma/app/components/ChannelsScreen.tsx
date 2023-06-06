@@ -5,7 +5,7 @@ import { styles } from "../utils/styles";
 
 
 export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {navigation: any, route: any}) => {
-    const { userId } = route.params;
+    const { userId, token } = route.params;
     const [channels, setChannels] = useState<Channel[]>([]);
     const [joining, setJoining] = useState('');
     const [leaving, setLeaving] = useState('');
@@ -15,12 +15,12 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
     // fetch channels from api and user info
     useEffect(() => {
         const asyncWrapper = async () => {
-            await getUserDisplayById(userId.toString()).then((response) => {
+            await getUserDisplayById(userId.toString(),token).then((response) => {
                 setCurrentUser(response);
             }).catch((error) =>
                 console.log(error)
             );
-            await listChannels().then((response) => {
+            await listChannels(token).then((response) => {
                 setChannels(response);          
             }).catch((error) =>
                 console.log(error)
@@ -34,14 +34,14 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
         let active = true;
         const interval = setInterval( () => {
             const asyncWrapper = async () => {
-                await getUserDisplayById(userId.toString()).then((response) => {
+                await getUserDisplayById(userId.toString(),token).then((response) => {
                     if (active) {
                         setCurrentUser(response);
                     }
                 }).catch((error) =>
                     console.log(error)
                 );
-                await listChannels().then((response) => {
+                await listChannels(token).then((response) => {
                     if (active) {
                         setChannels(response);
                     }                    
@@ -60,7 +60,7 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
 
     const handleLeaveChannel = async (channel: Channel) => {
         setLeaving(channel.id);
-        await removeUserFromChannel(channel.id, userId).catch((error) =>
+        await removeUserFromChannel(channel.id, userId, token).catch((error) =>
             console.log(error)
         );
         const index = channels.find(({ id }) => id === channel.id)?.members?.indexOf(userId);
@@ -73,13 +73,13 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
     // Navigate to the MessagesScreen and pass the channelId as a prop
     const handleNavigateToMessages = async (channel: Channel) => {
         if (channel.members?.includes(userId)) {
-            navigation.navigate('Messages', { channelId: channel.id, userId: userId.toString(), channel: channel });
+            navigation.navigate('Messages', { channelId: channel.id, userId: userId.toString(), channel: channel , token: token});
         } else {
             setJoining(channel.id);
-            await addUserToChannel(channel.id, userId).then(() => {
+            await addUserToChannel(channel.id, userId, token).then(() => {
                 channels.find(({ id }) => id === channel.id)?.members?.push(userId);
                 setChannels([...channels]);
-                navigation.navigate('Messages', { channelId: channel.id, userId: userId.toString(), channel: channel });
+                navigation.navigate('Messages', { channelId: channel.id, userId: userId.toString(), channel: channel , token: token});
             }
             ).catch((error) =>
                 console.log(error)
@@ -89,10 +89,10 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
     };
 
     const handleNavigateToProfile = async () => {
-        navigation.navigate('Profile', { userId: userId });
+        navigation.navigate('Profile', { userId: userId , token: token});
     };
     const handleNavigateToChannel = async () => {
-        navigation.navigate('Channels', { userId: userId });
+        navigation.navigate('Channels', { userId: userId, token: token });
     };
 
 

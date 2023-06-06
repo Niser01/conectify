@@ -5,14 +5,14 @@ import { getUserById,  User } from '../utils/api';
 
 
 export const ProfileScreen = ({navigation, route}: {navigation: any, route: any}) => {
-    const { userId } = route.params;
+    const { userId , token} = route.params;
     const [currentUser, setCurrentUser] = useState<User>();
     var status;
     var statusimg;
 
     useEffect(()=>{
     const asyncWrapper = async () => {
-            await getUserById(userId.toString()).then((response) => {
+            await getUserById(userId.toString(),token).then((response) => {
                 setCurrentUser(response);
             }).catch((error) =>
                 console.log(error)
@@ -23,13 +23,13 @@ export const ProfileScreen = ({navigation, route}: {navigation: any, route: any}
     }, []);
     
     const handleNavigateToProfile = async () => {
-        navigation.navigate('Profile', { userId: userId });
+        navigation.navigate('Profile', { userId: userId, token: token });
     };
     const handleNavigateToChannel = async () => {
-        navigation.navigate('Channels', { userId: userId });
+        navigation.navigate('Channels', { userId: userId, token: token });
     };
     const handleNavigateToEditProfile = async () => {
-        navigation.navigate('ProfileEdit', { userId: userId });
+        navigation.navigate('ProfileEdit', { userId: userId , token: token});
     };
 
     if(currentUser?.Status == 1){
