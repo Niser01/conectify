@@ -14,6 +14,7 @@ import { ChannelsScreen } from './app/components/ChannelsScreen';
 import { LoginScreen } from './app/components/LoginScreen';
 import {ProfileScreen} from './app/components/ProfileScreen';
 import {ProfileEdit}    from './app/components/ProfileEdit';
+import { Interop } from './app/components/Interop'
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,11 @@ function App(): JSX.Element {
                 <Stack.Screen
                     name="ProfileEdit"
                     component={ProfileEdit}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="Interop"
+                    component={Interop}
                     options={{ headerShown: false }}
                 />
             </Stack.Navigator>

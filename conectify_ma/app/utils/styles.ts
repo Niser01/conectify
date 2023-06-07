@@ -334,8 +334,17 @@ export const styles = StyleSheet.create({
         justifyContent:'space-evenly',
         borderWidth: 1,
         borderColor:"#353535",
+    },    
+    eventsContainer:{
+        alignItems:"center",
     },
-    
-
+    inputeventsContainer:{
+        width:"80%",
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderTopColor: '#1E293B',
+        marginBottom: 15,
+        
+    },
 
 });

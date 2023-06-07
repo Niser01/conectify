@@ -6,6 +6,7 @@ import { styles } from "../utils/styles";
 
 export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {navigation: any, route: any}) => {
     const { userId, token } = route.params;
+
     const [channels, setChannels] = useState<Channel[]>([]);
     const [joining, setJoining] = useState('');
     const [leaving, setLeaving] = useState('');
@@ -58,17 +59,6 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
         };
     }, []);
 
-    const handleLeaveChannel = async (channel: Channel) => {
-        setLeaving(channel.id);
-        await removeUserFromChannel(channel.id, userId, token).catch((error) =>
-            console.log(error)
-        );
-        const index = channels.find(({ id }) => id === channel.id)?.members?.indexOf(userId);
-        if (index !== undefined) {
-            channels.find(({ id }) => id === channel.id)?.members?.splice(index, 1);
-        }
-        setLeaving('');
-    };
 
     // Navigate to the MessagesScreen and pass the channelId as a prop
     const handleNavigateToMessages = async (channel: Channel) => {
@@ -93,6 +83,9 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
     };
     const handleNavigateToChannel = async () => {
         navigation.navigate('Channels', { userId: userId, token: token });
+    };
+    const handleNavigateinterop = async () => {
+        navigation.navigate('Interop', { userId: userId, token: token });
     };
 
 
@@ -160,20 +153,22 @@ export const ChannelsScreen = ({navigation, navigation: { goBack }, route}: {nav
                     <TouchableOpacity style={styles.footerSubImgText} onPress={()=> handleNavigateToChannels}>
                         <Image style={styles.footerImg} source={require('../assets/hogar.png')} />
                         <Text style={styles.footerText}>inicio</Text>
-                    </TouchableOpacity>        
-                    <TouchableOpacity style={styles.footerSubImgText}>
-                        <Image style={styles.footerImg} source={require('../assets/charla.png')} />
-                        <Text style={styles.footerText}>mensajes</Text>
-                    </TouchableOpacity> 
-                */}
+                    </TouchableOpacity>   
+                */}     
+                   
+               
 
                     <TouchableOpacity style={styles.footerSubImgText} onPress={handleNavigateToChannel}>
                         <Image style={styles.footerImg} source={require('../assets/usuarios.png')} />
-                        <Text style={styles.footerText}>canales</Text>
+                        <Text style={styles.footerText}>Canales</Text>
                     </TouchableOpacity> 
+                    <TouchableOpacity style={styles.footerSubImgText} onPress={handleNavigateinterop}>
+                        <Image style={styles.footerImg} source={require('../assets/calendario.png')} />
+                        <Text style={styles.footerText}>Eventos</Text>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.footerSubImgText} onPress={handleNavigateToProfile}>
                         <Image style={styles.footerImg} source={require('../assets/feliz.png')} />
-                        <Text style={styles.footerText}>tú</Text>
+                        <Text style={styles.footerText}>Tú</Text>
                     </TouchableOpacity>         
                 </View>
 

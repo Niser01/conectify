@@ -3,7 +3,14 @@ import stringToColour from "./user-colors";
 
 const AG_URL = 'http://34.173.4.99:4000/';
 
-
+export type event={
+    title: string;
+    description: string;
+    start: string;
+    end: string;
+    location: string;
+    allDay: string;
+}
 export type File = {
     id: string;
     userId: string;
@@ -48,6 +55,33 @@ export type User = {
     PhotoId?: string;
     Status?: number;
 };
+
+export async function  GetAndPostEvents(user: string,userId: string,channelId: string,token: string){
+    const geteventsQuery = {
+        "query": `query Query($channelId: String!, $userId: String!, $user: String!) {
+            GetAndPostEvents(channelId: $channelId, userId: $userId, user: $user)
+          }
+          `,
+          "variables":{  
+            "channelId": channelId,
+            "userId": userId,
+            "user": user
+          }
+    };
+    await axios({
+        url: AG_URL,
+        method: 'post',
+        headers: {
+            "content-type": "application/json",
+            "apollo-require-preflight": "true",
+            "Authorization":token
+          },
+        data: geteventsQuery
+    }).catch((error) => {
+        console.log(error);
+    });
+}
+
 
 export async function createMessage(channelId: string, userId: string, message: string, token: string) {
     const createMessageMutation = {
